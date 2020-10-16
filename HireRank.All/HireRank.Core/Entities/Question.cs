@@ -15,7 +15,7 @@ namespace HireRank.Core.Entities
 
         public Employer Employer { get; set; }
 
-        public ICollection<VacancyQuestion> VacancyQuestion { get; set; } = new HashSet<VacancyQuestion>();
+        public ICollection<VacancyQuestion> VacancyQuestions { get; set; } = new HashSet<VacancyQuestion>();
 
         public ICollection<Option> Options { get; set; } = new HashSet<Option>();
     }

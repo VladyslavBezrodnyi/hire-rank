@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace HireRank.Core.Entities
 {
@@ -14,6 +13,10 @@ namespace HireRank.Core.Entities
 
         public DateTime EndDate { get; set; }
 
-        public ICollection<Vacancy> Vacancies = new HashSet<Vacancy>();
+        public Guid AdminId { get; set; }
+
+        public Admin Admin { get; set; }
+
+        public ICollection<Vacancy> Vacancies { get; set; } = new HashSet<Vacancy>();
     }
 }
