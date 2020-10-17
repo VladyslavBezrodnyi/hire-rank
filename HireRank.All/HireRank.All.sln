@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HireRank.WebApi", "HireRank.WebApi\HireRank.WebApi.csproj", "{37B1F13D-EED2-48BD-9158-37885B25CFF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HireRank.WebApi", "HireRank.WebApi\HireRank.WebApi.csproj", "{37B1F13D-EED2-48BD-9158-37885B25CFF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HireRank.Core", "HireRank.Core\HireRank.Core.csproj", "{89B15AF2-1338-46BD-9FCC-2F1979E921BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HireRank.Core", "HireRank.Core\HireRank.Core.csproj", "{89B15AF2-1338-46BD-9FCC-2F1979E921BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HireRank.Infrastructure", "HireRank.Infrastructure\HireRank.Infrastructure.csproj", "{EE122E72-EE8D-4E61-B094-D97259FAFDA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HireRank.Infrastructure", "HireRank.Infrastructure\HireRank.Infrastructure.csproj", "{EE122E72-EE8D-4E61-B094-D97259FAFDA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HireRank.Application", "HireRank.Application\HireRank.Application.csproj", "{EF719B7C-38C9-414A-9113-0AEEC5DF2EBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HireRank.Application", "HireRank.Application\HireRank.Application.csproj", "{EF719B7C-38C9-414A-9113-0AEEC5DF2EBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HireRank.AngularClient", "HireRank.AngularClient\HireRank.AngularClient.csproj", "{0CBE45B1-42C4-43FA-97E9-7F6ACA9591F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{EF719B7C-38C9-414A-9113-0AEEC5DF2EBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF719B7C-38C9-414A-9113-0AEEC5DF2EBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF719B7C-38C9-414A-9113-0AEEC5DF2EBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CBE45B1-42C4-43FA-97E9-7F6ACA9591F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CBE45B1-42C4-43FA-97E9-7F6ACA9591F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CBE45B1-42C4-43FA-97E9-7F6ACA9591F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CBE45B1-42C4-43FA-97E9-7F6ACA9591F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
