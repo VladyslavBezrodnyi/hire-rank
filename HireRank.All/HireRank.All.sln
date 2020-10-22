@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HireRank.Infrastructure", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HireRank.Application", "HireRank.Application\HireRank.Application.csproj", "{EF719B7C-38C9-414A-9113-0AEEC5DF2EBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HireRank.AngularClient", "HireRank.AngularClient\HireRank.AngularClient.csproj", "{0CBE45B1-42C4-43FA-97E9-7F6ACA9591F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HireRank.AngularClient", "HireRank.AngularClient\HireRank.AngularClient.csproj", "{0CBE45B1-42C4-43FA-97E9-7F6ACA9591F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HireRank.Common", "HireRank.Common\HireRank.Common.csproj", "{07FE786C-F9EC-4C4B-9CA1-173392A0D328}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{0CBE45B1-42C4-43FA-97E9-7F6ACA9591F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CBE45B1-42C4-43FA-97E9-7F6ACA9591F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CBE45B1-42C4-43FA-97E9-7F6ACA9591F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07FE786C-F9EC-4C4B-9CA1-173392A0D328}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07FE786C-F9EC-4C4B-9CA1-173392A0D328}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07FE786C-F9EC-4C4B-9CA1-173392A0D328}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07FE786C-F9EC-4C4B-9CA1-173392A0D328}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace HireRank.Infrastructure.Configurations
+namespace HireRank.Infrastructure.EntityConfigurations
 {
     public class EmployerConfiguration : IEntityTypeConfiguration<Employer>
     {
