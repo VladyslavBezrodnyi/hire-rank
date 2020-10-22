@@ -43,7 +43,6 @@ export class RegistrationComponent implements OnInit {
       email: [null, [Validators.email, Validators.required]],
       password: [null, [Validators.required]],
       checkPassword: [null, [Validators.required, this.confirmationValidator]],
-      agree: [false]
     });
   }
 }

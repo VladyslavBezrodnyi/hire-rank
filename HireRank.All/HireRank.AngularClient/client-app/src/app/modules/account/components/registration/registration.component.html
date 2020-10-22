@@ -28,6 +28,17 @@
         </ng-template>
       </nz-form-control>
     </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired>Confirm Password</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
+        <nz-radio-group [(ngModel)]="radioValue" nzButtonStyle="solid">
+          <label nz-radio-button nzValue="A">Hangzhou</label>
+          <label nz-radio-button nzValue="B">Shanghai</label>
+          <label nz-radio-button nzValue="C">Beijing</label>
+          <label nz-radio-button nzValue="D">Chengdu</label>
+        </nz-radio-group>
+      </nz-form-control>
+    </nz-form-item>
     <nz-form-item nz-row class="register-area">
       <nz-form-control [nzSpan]="14" [nzOffset]="6">
         <button nz-button nzType="primary">Register</button>
