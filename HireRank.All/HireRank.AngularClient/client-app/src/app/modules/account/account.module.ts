@@ -1,3 +1,4 @@
+import { AccountRoutingModule } from './account-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './components/login/login.component';
@@ -23,7 +24,12 @@ import { IconDefinition } from '@ant-design/icons-angular';
     NzFormModule,
     NzButtonModule,
     ReactiveFormsModule,
-    IconsProviderModule
+    IconsProviderModule,
+    AccountRoutingModule
+  ],
+  exports: [
+    LoginComponent
   ]
+
 })
 export class AccountModule { }

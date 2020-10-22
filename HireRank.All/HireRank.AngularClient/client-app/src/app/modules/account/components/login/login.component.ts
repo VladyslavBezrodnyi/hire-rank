@@ -8,8 +8,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  @Output()
-  onTakeToken = new EventEmitter<string>()
+  //@Output()
+  // onTakeToken = new EventEmitter<string>()
 
   isVisible = true;
   validateForm!: FormGroup;
@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
     if (this.validateForm.status === "VALID") {
       console.log('userSubmit emited (onSubmit)');
     }
-
   }
 
   ngOnInit(): void {
@@ -32,7 +31,5 @@ export class LoginComponent implements OnInit {
       userName: [null, [Validators.required]],
       password: [null, [Validators.required]]
     });
-
-
-
+  }
 }
