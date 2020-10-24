@@ -11,6 +11,9 @@ export class RegistrationComponent implements OnInit {
   isVisible = true;
   validateForm!: FormGroup;
 
+  // затычка
+  radioValue;
+
   submitForm(): void {
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();

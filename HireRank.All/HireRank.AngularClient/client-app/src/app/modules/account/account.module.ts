@@ -8,9 +8,10 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { UserOutline, SendOutline, LockOutline } from '@ant-design/icons-angular/icons';
 import { IconDefinition } from '@ant-design/icons-angular';
+import {NzRadioModule} from 'ng-zorro-antd/radio';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,9 @@ import { IconDefinition } from '@ant-design/icons-angular';
     NzButtonModule,
     ReactiveFormsModule,
     IconsProviderModule,
-    AccountRoutingModule
+    AccountRoutingModule,
+    NzRadioModule,
+    FormsModule
   ],
   exports: [
     LoginComponent

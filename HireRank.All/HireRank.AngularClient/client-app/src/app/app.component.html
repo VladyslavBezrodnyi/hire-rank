@@ -5,6 +5,16 @@
         <li nz-menu-item>nav 1</li>
         <li nz-menu-item>nav 2</li>
         <li nz-menu-item>nav 3</li>
+
+        <!-- ONLY FOR TESTS -->
+        <li nz-submenu nzTitle="Profile" nzIcon="idcard">
+          <ul>
+            <li nz-menu-item routerLink="/admin/profile"> Admin profile </li>
+            <li nz-menu-item routerLink="/employer/profile"> Employer profile </li>
+            <li nz-menu-item routerLink="/student/profile"> Student profile </li>
+          </ul>
+        </li>
+
       </ul>
     </div>
   </nz-header>
