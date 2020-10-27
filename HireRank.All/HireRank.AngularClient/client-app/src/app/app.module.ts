@@ -1,22 +1,22 @@
-import { AccountModule } from './modules/account/account.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
+
+import { AccountModule } from './modules/account/account.module';
 import { AppRoutingModule } from './app-routing.module';
+import { IconsProviderModule } from './icons-provider.module';
+import { NgZorroAntdModule } from './shared/libraries/ng-zorro-antd/ng-zorro-antd.module';
+
 import { AppComponent } from './app.component';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { ResponseInterceptor } from './core/interceptors/response.interceptor';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
-import { IconsProviderModule } from './icons-provider.module';
-import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { en_US } from 'ng-zorro-antd/i18n';
-import { registerLocaleData } from '@angular/common';
-import en from '@angular/common/locales/en';
-import { NzMessageModule } from 'ng-zorro-antd/message';
 
 registerLocaleData(en);
 
@@ -29,11 +29,9 @@ registerLocaleData(en);
     AppRoutingModule,
     HttpClientModule,
     IconsProviderModule,
-    NzLayoutModule,
-    NzMenuModule,
+    NgZorroAntdModule,
     FormsModule,
     BrowserAnimationsModule,
-    NzMessageModule,
     AccountModule
   ],
   providers: [
