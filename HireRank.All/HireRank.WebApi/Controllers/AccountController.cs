@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HireRank.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/account")]
     [ApiController]
     public class AccountController : ControllerBase
     {
@@ -23,6 +23,10 @@ namespace HireRank.WebApi.Controllers
 
         [HttpPost("register/student")]
         public async Task<TokenResponse> RegisterStudentAsync([FromBody] StudentRegisterCommand request)
+            => await _mediator.Send(request);
+
+        [HttpPost("register/employer")]
+        public async Task<TokenResponse> RegisterEmployerAsync([FromBody] EmployerRegisterCommand request)
             => await _mediator.Send(request);
     }
 }

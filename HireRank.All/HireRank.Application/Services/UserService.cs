@@ -1,7 +1,9 @@
 ﻿using HireRank.Application.Services.Interfaces;
 using HireRank.Application.ViewModels.Shared;
 using HireRank.Common.Configurations;
+using HireRank.Common.ExceptionBuilders;
 using HireRank.Common.Exceptions;
+using HireRank.Common.ModelValidators;
 using HireRank.Core.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -60,10 +62,9 @@ namespace HireRank.Application.Services
 
         public async Task RegisterUserAsync<TUser>(TUser user, string password, string role) where TUser : User
         {
-            // TODO : Add validation
-            //ValidationResults result = ModelValidator.IsValid(registrationDTO);
-            //if (!result.Successed)
-            //    throw ValidationExceptionBuilder.BuildValidationException(result);
+            ValidationResults result = ModelValidator.IsValid(user);
+            if (!result.Successed)
+                throw ValidationExceptionBuilder.BuildValidationException(result);
 
             await CheckIfThePasswordIsValid(password);
             await CheckIfTheUserDoesNotExist(user);

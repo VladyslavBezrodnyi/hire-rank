@@ -12,26 +12,25 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { UserOutline, SendOutline, LockOutline } from '@ant-design/icons-angular/icons';
 import { IconDefinition } from '@ant-design/icons-angular';
 import {NzRadioModule} from 'ng-zorro-antd/radio';
+import {NgZorroAntdModule} from '../../shared/libraries/ng-zorro-antd/ng-zorro-antd.module';
 
 @NgModule({
   declarations: [
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
   ],
   imports: [
     CommonModule,
-    NzModalModule,
-    NzInputModule,
-    NzFormModule,
-    NzButtonModule,
     ReactiveFormsModule,
     IconsProviderModule,
     AccountRoutingModule,
     NzRadioModule,
-    FormsModule
+    FormsModule,
+    NgZorroAntdModule
   ],
   exports: [
-    LoginComponent
+    LoginComponent,
+    RegistrationComponent
   ]
 
 })

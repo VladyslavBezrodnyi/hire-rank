@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { CurrentUser } from 'src/app/shared/models/current-user.model';
-import { environment } from 'src/environments/environment.prod';
-import * as jwt_decode from 'jwt-decode';
+import { environment } from 'src/environments/environment';
+// @ts-ignore
+import jwt_decode from 'jwt-decode';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { TokenResponse } from 'src/app/shared/models/token-response.model';
 import { LoginModel } from 'src/app/shared/models/login.model';

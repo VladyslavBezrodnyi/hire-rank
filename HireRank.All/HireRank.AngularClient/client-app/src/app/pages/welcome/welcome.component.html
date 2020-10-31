@@ -1,3 +1,8 @@
 <h1>
   HOME PAGE #заглушка
 </h1>
+
+<button nz-button [nzType]="'primary'" style="margin:auto; display:block" (click)="showModal()">Register</button>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Registration" nzFooter=null (nzOnCancel)="handleCancel()">
+  <app-registration></app-registration>
+</nz-modal>
