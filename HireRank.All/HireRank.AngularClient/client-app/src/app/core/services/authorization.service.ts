@@ -36,7 +36,7 @@ export class AuthorizationService {
   login(loginModel: LoginModel): Observable<TokenResponse> {
     return this.http.post<TokenResponse>(environment.apiUrl + `/account/login`, loginModel)
       .pipe(map(tokenResponse => {
-        var token = tokenResponse.accessToken;
+        let token = tokenResponse.accessToken;
         this.currentUser = this.getUserInfo(token, loginModel.email);
         localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
         this.loggedIn.next(true);
@@ -53,8 +53,8 @@ export class AuthorizationService {
   }
 
   getUserInfo(token: string, email: string): CurrentUser {
-    var decodedToken = jwt_decode(token);
-    var user = {
+    let decodedToken = jwt_decode(token);
+    let user = {
       id: decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'],
       email: email,
       token: token,
