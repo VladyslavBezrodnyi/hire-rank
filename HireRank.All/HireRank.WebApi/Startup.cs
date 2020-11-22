@@ -50,6 +50,13 @@ namespace HireRank.WebApi
                     Type = SecuritySchemeType.ApiKey
                 });
             });
+
+            /* Solution for the issue:
+             * Synchronous operations are disallowed. Call WriteAsync or set AllowSynchronousIO to true instead.*/
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

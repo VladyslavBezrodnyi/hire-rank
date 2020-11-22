@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { CurrentUser } from 'src/app/shared/models/current-user.model';
-import { environment } from 'src/environments/environment.prod';
-import * as jwt_decode from 'jwt-decode';
+import { environment } from 'src/environments/environment';
+// @ts-ignore
+import jwt_decode from 'jwt-decode';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { TokenResponse } from 'src/app/shared/models/token-response.model';
 import { LoginModel } from 'src/app/shared/models/login.model';
@@ -35,7 +36,7 @@ export class AuthorizationService {
   login(loginModel: LoginModel): Observable<TokenResponse> {
     return this.http.post<TokenResponse>(environment.apiUrl + `/account/login`, loginModel)
       .pipe(map(tokenResponse => {
-        var token = tokenResponse.accessToken;
+        let token = tokenResponse.accessToken;
         this.currentUser = this.getUserInfo(token, loginModel.email);
         localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
         this.loggedIn.next(true);
@@ -52,8 +53,8 @@ export class AuthorizationService {
   }
 
   getUserInfo(token: string, email: string): CurrentUser {
-    var decodedToken = jwt_decode(token);
-    var user = {
+    let decodedToken = jwt_decode(token);
+    let user = {
       id: decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'],
       email: email,
       token: token,

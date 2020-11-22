@@ -2,23 +2,50 @@
   <nz-header>
     <div class="app-header">
       <ul nz-menu nzTheme="dark" nzMode="horizontal">
-        <li nz-menu-item>nav 1</li>
+        <li nz-menu-item>
+          <a href="#">Home</a>
+        </li>
         <li nz-menu-item>nav 2</li>
         <li nz-menu-item>nav 3</li>
 
-        <!-- ONLY FOR TESTS -->
-        <li nz-submenu nzTitle="Profile" nzIcon="idcard">
-          <ul>
-            <li nz-menu-item routerLink="/admin/profile"> Admin profile </li>
-            <li nz-menu-item routerLink="/employer/profile"> Employer profile </li>
-            <li nz-menu-item routerLink="/student/profile"> Student profile </li>
-          </ul>
+<!--        &lt;!&ndash; ONLY FOR TESTS &ndash;&gt;-->
+<!--        <li nz-submenu nzTitle="Profile" nzIcon="idcard">-->
+<!--          <ul>-->
+<!--            <li nz-menu-item routerLink="/admin/profile"> Admin profile </li>-->
+<!--            <li nz-menu-item routerLink="/employer/profile"> Employer profile </li>-->
+<!--            <li nz-menu-item routerLink="/student/profile"> Student profile </li>-->
+<!--          </ul>-->
+<!--        </li>-->
+
+        <li nz-menu-item *ngIf="isLogged" [ngSwitch]="this.authorizationService?.currentUser?.role">
+          <ng-template ngSwitchCase="admin">
+            <a routerLink="/admin/profile"> Admin profile </a>
+          </ng-template>
+          <ng-template ngSwitchCase="employer">
+            <a routerLink="/employer/profile"> Employer profile </a>
+          </ng-template>
+          <ng-template ngSwitchCase="student">
+            <a routerLink="/student/profile"> Student profile </a>
+          </ng-template>
         </li>
+
+        <li nz-menu-item *ngIf="isLogged;else login">
+          <button nz-button [nzType]="'primary'" (click)="logOut()">Logout</button>
+        </li>
+        <ng-template #login>
+          <li nz-menu-item>
+            <button nz-button [nzType]="'primary'" (click)="showLoginForm()">Login</button>
+          </li>
+        </ng-template>
 
       </ul>
     </div>
   </nz-header>
   <nz-content>
+    <nz-modal [(nzVisible)]="isVisible" nzTitle="Login" nzFooter=null (nzOnCancel)="handleCancel()">
+      <app-login (logEvent)="hideLoginForm()"></app-login>
+    </nz-modal>
+
     <div class="inner-content">
       <router-outlet></router-outlet>
     </div>

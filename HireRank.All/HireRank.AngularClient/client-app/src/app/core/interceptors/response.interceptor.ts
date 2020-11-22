@@ -17,16 +17,16 @@ export class ResponseInterceptor implements HttpInterceptor {
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
                     var responseBody = event.body as ApiResponse;
-                    if (responseBody.statusCode != 200) {
-                        if (responseBody.errorCode == 1)
-                            throw new Error(responseBody.details);
+                    if (responseBody.StatusCode != 200) {
+                        if (responseBody.ErrorCode == 1)
+                            throw new Error(responseBody.Details);
                         else
                         {
-                            console.log(responseBody.details);
-                            this.message.info(responseBody.details);
+                            console.log(responseBody.Details);
+                            this.message.info(responseBody.Details);
                         }
                     }
-                    return event.clone({ body: responseBody.data });
+                    return event.clone({ body: responseBody.Data });
                 }
             })
         );

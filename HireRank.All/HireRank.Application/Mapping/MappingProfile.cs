@@ -21,6 +21,9 @@ namespace HireRank.Infrastructure.Mapping
         {
             CreateMap<StudentRegisterCommand, Student>()
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
+
+            CreateMap<EmployerRegisterCommand, Employer>()
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
         }
     }
 }

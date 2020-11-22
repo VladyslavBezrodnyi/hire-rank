@@ -30,19 +30,19 @@ export class StudentProfileComponent implements OnInit {
 
   getStudent() {
     // ЗАГЛУШКА
-    this.student = { firstName: 'Тарас', middleName: 'Григорович', lastName: 'Шевченко', dateOfBirth: new Date(),
-      universityName: 'ХНУРЕ', major: '???' };
+    // this.student = { firstName: 'Тарас', middleName: 'Григорович', lastName: 'Шевченко', dateOfBirth: new Date(),
+    //   universityName: 'ХНУРЕ', major: '???' };
 
-    // this.studentService.get()
-    //   .subscribe(data => {
-    //     this.student = data;
-    //   });
+    this.studentService.get()
+      .subscribe(data => {
+        this.student = data;
+      });
   }
 
   submitStudentForm() {
-    // this.studentService.edit(this.student)
-    //   .subscribe(data => {
-    //     this.student = data;
-    //   });
+    this.studentService.edit(this.student)
+      .subscribe(data => {
+        this.student = data;
+      });
   }
 }
