@@ -35,7 +35,7 @@ namespace HireRank.Infrastructure
 
         public IQueryable<Option> Options => _context.Options;
 
-        public async Task<TEntity> AddEntity<TEntity>(TEntity entity, bool saveChanges = false) where TEntity : class
+        public async Task<TEntity> AddEntityAsync<TEntity>(TEntity entity, bool saveChanges = false) where TEntity : class
         {
             await _context.Set<TEntity>().AddAsync(entity);
 
@@ -45,7 +45,7 @@ namespace HireRank.Infrastructure
             return entity;
         }
 
-        public async Task UpdateEntity<TEntity>(TEntity entity, bool saveChanges = false) where TEntity : class
+        public async Task UpdateEntityAsync<TEntity>(TEntity entity, bool saveChanges = false) where TEntity : class
         {
             _context.Set<TEntity>().Update(entity);
 
@@ -53,7 +53,7 @@ namespace HireRank.Infrastructure
                 await SaveChangesAsync();
         }
 
-        public async Task DeleteEntity<TEntity>(TEntity entity, bool saveChanges = false) where TEntity : class
+        public async Task DeleteEntityAsync<TEntity>(TEntity entity, bool saveChanges = false) where TEntity : class
         {
             _context.Set<TEntity>().Remove(entity);
 

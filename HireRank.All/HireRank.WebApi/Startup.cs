@@ -56,6 +56,8 @@ namespace HireRank.WebApi
                     Type = SecuritySchemeType.ApiKey
                 });
             });
+
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,21 +75,18 @@ namespace HireRank.WebApi
             });
 
             app.UseHttpsRedirection();
-
-            app.UseRouting();
-
             app.UseCors("SPA-client");
 
-            app.UseMiddleware<ExceptionHandlingMiddleware>();
-            app.UseMiddleware<ResponseCreatingMiddleware>();
-
             app.UseAuthentication();
+            app.UseRouting();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
+            app.UseMiddleware<ResponseCreatingMiddleware>();
 
             app.MigrateDb();
             app.SeedIdentities();

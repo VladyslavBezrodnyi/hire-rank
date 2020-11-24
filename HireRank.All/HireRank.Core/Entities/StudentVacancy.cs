@@ -1,8 +1,9 @@
-﻿using System;
+﻿using HireRank.Core.Interfaces;
+using System;
 
 namespace HireRank.Core.Entities
 {
-    public class StudentVacancy
+    public class StudentVacancy : IEntity
     {
         public Guid Id { get; set; }
 

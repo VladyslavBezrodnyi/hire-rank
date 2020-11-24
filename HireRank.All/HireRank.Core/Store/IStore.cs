@@ -26,11 +26,11 @@ namespace HireRank.Core.Store
 
         public IQueryable<Option> Options { get; }
 
-        Task<TEntity> AddEntity<TEntity>(TEntity entity, bool saveChanges = false) where TEntity : class;
+        Task<TEntity> AddEntityAsync<TEntity>(TEntity entity, bool saveChanges = false) where TEntity : class;
 
-        Task UpdateEntity<TEntity>(TEntity entity, bool saveChanges = false) where TEntity : class;
+        Task UpdateEntityAsync<TEntity>(TEntity entity, bool saveChanges = false) where TEntity : class;
 
-        Task DeleteEntity<TEntity>(TEntity entity, bool saveChanges = false) where TEntity : class;
+        Task DeleteEntityAsync<TEntity>(TEntity entity, bool saveChanges = false) where TEntity : class;
 
         Task SaveChangesAsync();
     }

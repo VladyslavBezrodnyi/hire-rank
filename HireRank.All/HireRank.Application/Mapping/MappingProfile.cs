@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HireRank.Application.Commands.Account;
+using HireRank.Application.Queries.Campaigns;
 using HireRank.Core.Entities;
 
 namespace HireRank.Infrastructure.Mapping
@@ -14,7 +15,7 @@ namespace HireRank.Infrastructure.Mapping
 
         private void MapQueris()
         {
-            // mapping for queries
+            CreateMap<Campaign, CampaignViewModel>();
         }
 
         private void MapCommands()

@@ -81,13 +81,13 @@ namespace HireRank.Infrastructure
                 .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, jwtBearerOptions => {
                     jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateIssuerSigningKey = true,
+                        ValidateIssuerSigningKey = false,
                         IssuerSigningKey = authConfiguration.KEY,
 
-                        ValidateIssuer = true,
+                        ValidateIssuer = false,
                         ValidIssuer = authConfiguration.ISSUER,
 
-                        ValidateAudience = true,
+                        ValidateAudience = false,
                         ValidAudience = authConfiguration.AUDIENCE,
 
                         ValidateLifetime = true,
