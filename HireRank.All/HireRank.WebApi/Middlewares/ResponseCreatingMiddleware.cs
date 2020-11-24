@@ -21,21 +21,18 @@ namespace HireRank.WebApi.Middlewares
             var originalBodyStream = context.Response.Body;
             try
             {
-                using (var responseBody = new MemoryStream())
-                {
-                    //make the response.body stream readable and empty 
-                    context.Response.Body = responseBody;
+                using var responseBody = new MemoryStream();
 
-                    await _next(context);
+                //make the response.body stream readable and empty 
+                context.Response.Body = responseBody;
 
-                    //write the response made to the stream
-                    using (var streamWriter = new StreamWriter(originalBodyStream))
-                    {
-                        var response = await ResponseCreator.CreateSuccessResponseAsync(context.Response, (int)HttpStatusCode.OK);
+                await _next(context);
 
-                        streamWriter.Write(response);
-                    }
-                }
+                //write the response made to the stream
+                using var streamWriter = new StreamWriter(originalBodyStream);
+                var response = await ResponseCreator.CreateSuccessResponseAsync(context.Response, (int)HttpStatusCode.OK);
+
+                await streamWriter.WriteAsync(response);
             }
             finally
             {

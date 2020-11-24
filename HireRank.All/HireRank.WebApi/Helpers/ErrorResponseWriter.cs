@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace HireRank.WebApi.Helpers
 {
     public class ErrorResponseWriter
     {
-        public static void WriteExceptionResponse(HttpContext context, string response)
+        public static async Task WriteExceptionResponseAsync(HttpContext context, string response)
         {
             var originalBodyStream = context.Response.Body;
             try
@@ -13,7 +14,7 @@ namespace HireRank.WebApi.Helpers
                 using var streamWriter = new StreamWriter(originalBodyStream);
                 using var responseBody = new MemoryStream();
                 context.Response.Body = responseBody;
-                streamWriter.Write(response);
+                await streamWriter.WriteAsync(response);
             }
             finally
             {

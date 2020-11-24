@@ -25,16 +25,16 @@ namespace HireRank.WebApi.Middlewares
                 await _next(context);
                 if (context.Response.StatusCode == 403)
                 {
-                    ErrorResponseWriter.WriteExceptionResponse(context, "You don't a have permission");
+                    await ErrorResponseWriter.WriteExceptionResponseAsync(context, "You don't a have permission");
                 }
             }
             catch (Exception ex)
             {
-                HandleException(context, ex);
+                await HandleExceptionAsync(context, ex);
             }
         }
 
-        private void HandleException(HttpContext context, Exception ex)
+        private async Task HandleExceptionAsync(HttpContext context, Exception ex)
         {
             string exceptionResponse;
             if (ex.GetType() == typeof(EntityNotFoundException))
@@ -61,7 +61,7 @@ namespace HireRank.WebApi.Middlewares
                                                                       (int)ErrorCodes.ServerError,
                                                                         "server error");
             }
-            ErrorResponseWriter.WriteExceptionResponse(context, exceptionResponse);
+            await ErrorResponseWriter.WriteExceptionResponseAsync(context, exceptionResponse);
         }
     }
 }

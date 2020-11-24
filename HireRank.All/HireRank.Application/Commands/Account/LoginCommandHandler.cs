@@ -1,8 +1,6 @@
 ﻿using HireRank.Application.Services;
 using HireRank.Application.ViewModels.Shared;
-using HireRank.Core.Entities;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
 using System.Threading;
 using System.Threading.Tasks;
 

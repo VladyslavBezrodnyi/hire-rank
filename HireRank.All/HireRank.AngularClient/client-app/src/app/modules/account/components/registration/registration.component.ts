@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {RegisterStudentModel} from '../../../../shared/models/register-student.model';
 import {RegisterEmployerModel} from '../../../../shared/models/register-employer.model';
@@ -19,6 +19,9 @@ export class RegistrationComponent implements OnInit {
   radioValue: string = 'Student';
   errorMessage: string = null;
   form: FormGroup;
+
+  @Output() registerEvent = new EventEmitter<boolean>();
+
   constructor(private fb: FormBuilder, private registerService: RegisterService, private router: Router,
               private authorizationService: AuthorizationService) {}
 
@@ -42,57 +45,17 @@ export class RegistrationComponent implements OnInit {
     });
 
     this.generalForm.get('role').valueChanges.subscribe(value => {
-      console.log(this.generalForm.get('role').value);
 
       if (value == this.studentRoleName && this.radioValue != this.studentRoleName) {
-        console.log('value == this.studentRoleName');
         this.radioValue = this.studentRoleName;
-        this.generalForm.controls.firstName.setValidators([Validators.required]);
-        this.generalForm.controls.middleName.setValidators([Validators.required]);
-        this.generalForm.controls.lastName.setValidators([Validators.required]);
-        this.generalForm.controls.dateOfBirth.setValidators([Validators.required]);
-        this.generalForm.controls.universityName.setValidators([Validators.required]);
-        this.generalForm.controls.major.setValidators([Validators.required]);
-        this.generalForm.controls.companyName.setValidators(null);
-        this.generalForm.controls.companyDescription.setValidators(null);
-        this.generalForm.controls.companyAddress.setValidators(null);
-        this.generalForm.controls.contactPhoneNumber.setValidators(null);
-        this.generalForm.controls.siteUrl.setValidators(null);
-
-        for (const i in this.generalForm.controls) {
-          this.generalForm.controls[i].updateValueAndValidity();
-        }
 
       } else if (value == this.employerRoleName && this.radioValue != this.employerRoleName) {
-        console.log('value == this.employerRoleName');
         this.radioValue = this.employerRoleName;
-        this.generalForm.controls.firstName.setValidators(null);
-        this.generalForm.controls.middleName.setValidators(null);
-        this.generalForm.controls.lastName.setValidators(null);
-        this.generalForm.controls.dateOfBirth.setValidators(null);
-        this.generalForm.controls.universityName.setValidators(null);
-        this.generalForm.controls.major.setValidators(null);
-        this.generalForm.controls.companyName.setValidators([Validators.required]);
-        this.generalForm.controls.companyDescription.setValidators([Validators.required]);
-        this.generalForm.controls.companyAddress.setValidators([Validators.required]);
-        this.generalForm.controls.contactPhoneNumber.setValidators([Validators.required]);
-        this.generalForm.controls.siteUrl.setValidators([Validators.required]);
-
-        for (const i in this.generalForm.controls) {
-          this.generalForm.controls[i].updateValueAndValidity();
-        }
       }
     });
   }
 
   submitForm(): void {
-    // for (const i in this.generalForm.controls) {
-    //   this.generalForm.controls[i].markAsDirty();
-    //   this.generalForm.controls[i].updateValueAndValidity();
-    // }
-
-    console.log('form submit');
-
     if (this.radioValue == this.studentRoleName){
       this.fillStudentModel();
     } else if (this.radioValue == this.employerRoleName) {
@@ -101,46 +64,39 @@ export class RegistrationComponent implements OnInit {
   }
 
   fillStudentModel(){
-    if (this.generalForm.valid) {
-      console.log('fill model');
-      let registrationStudentModel: RegisterStudentModel = {
+    debugger;
+      let registrationStudentModel = <RegisterStudentModel> {
         email: this.generalForm.value.email,
-        password: this.generalForm.value.password,
+        password:  this.generalForm.value.password,
         firstName: this.generalForm.value.firstName,
         middleName: this.generalForm.value.middleName,
         lastName: this.generalForm.value.lastName,
         dateOfBirth: this.generalForm.value.dateOfBirth,
         universityName: this.generalForm.value.universityName,
         major: this.generalForm.value.major
-      };
+      }
       this.registerStudent(registrationStudentModel);
-    }
+    
   }
 
   fillEmployerModel(){
-    if (this.generalForm.valid) {
-      console.log('fill model');
-      let registrationEmployerModel: RegisterEmployerModel = {
-        email: this.generalForm.value.email,
-        password: this.generalForm.value.password,
-        companyName: this.generalForm.value.companyName,
-        companyDescription: this.generalForm.value.companyDescription,
-        companyAddress: this.generalForm.value.companyAddress,
-        contactPhoneNumber: this.generalForm.value.contactPhoneNumber,
-        siteUrl: this.generalForm.value.siteUrl
-      };
-      this.registerEmployer(registrationEmployerModel);
-    }
+    let registrationEmployerModel = <RegisterEmployerModel> {
+      email: this.generalForm.value.email,
+      password:  this.generalForm.value.password,
+      companyName: this.generalForm.value.companyName,
+      companyAddress: this.generalForm.value.companyAddress,
+      companyDescription: this.generalForm.value.companyDescription,
+      contactPhoneNumber: this.generalForm.value.contactPhoneNumber,
+      siteUrl: this.generalForm.value.siteUrl
+    };
+    this.registerEmployer(registrationEmployerModel);
   }
 
   registerStudent(registerViewModel: RegisterStudentModel): void {
     this.registerService.registerStudent(registerViewModel).subscribe(
       res => {
-        let loginModel = {
-          email: registerViewModel.email,
-          password: registerViewModel.password
-        } as LoginModel;
-        this.login(loginModel);
+        this.authorizationService.loginToSystem(res, registerViewModel.email);
+        this.registerEvent.emit(true);
       },
       errors => {
         this.errorMessage = errors.message;
@@ -151,11 +107,8 @@ export class RegistrationComponent implements OnInit {
   registerEmployer(registerViewModel: RegisterEmployerModel): void {
     this.registerService.registerEmployer(registerViewModel).subscribe(
       res => {
-        let loginModel = {
-          email: registerViewModel.email,
-          password: registerViewModel.password
-        } as LoginModel;
-        this.login(loginModel);
+        this.authorizationService.loginToSystem(res, registerViewModel.email);
+        this.registerEvent.emit(true);
       },
       errors => {
         this.errorMessage = errors.message;
@@ -166,11 +119,6 @@ export class RegistrationComponent implements OnInit {
   login(loginModel: LoginModel) {
     this.authorizationService.login(loginModel)
       .subscribe(x => this.router.navigate(['/']));
-  }
-
-  updateConfirmValidator(): void {
-    /** wait for refresh value */
-    Promise.resolve().then(() => this.generalForm.controls.checkPassword.updateValueAndValidity());
   }
 
   confirmationValidator = (control: FormControl): { [s: string]: boolean } => {

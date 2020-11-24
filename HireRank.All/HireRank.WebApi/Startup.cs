@@ -3,6 +3,7 @@ using HireRank.Infrastructure;
 using HireRank.WebApi.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -37,6 +38,11 @@ namespace HireRank.WebApi
                                   });
             });
 
+            services.Configure<KestrelServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
+
             services.AddSignalR();
 
             services.AddSwaggerGen(c =>
@@ -49,13 +55,6 @@ namespace HireRank.WebApi
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.ApiKey
                 });
-            });
-
-            /* Solution for the issue:
-             * Synchronous operations are disallowed. Call WriteAsync or set AllowSynchronousIO to true instead.*/
-            services.Configure<IISServerOptions>(options =>
-            {
-                options.AllowSynchronousIO = true;
             });
         }
 

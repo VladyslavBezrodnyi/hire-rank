@@ -45,6 +45,13 @@ export class AuthorizationService {
       }));
   }
 
+  loginToSystem(tokenResponse: TokenResponse, email: string){
+    this.currentUser = this.getUserInfo(tokenResponse.accessToken, email);
+    localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+    this.loggedIn.next(true);
+    this.role.next(this.currentUser.role);
+  }
+
   logout(): void {
     localStorage.removeItem('currentUser');
     this.currentUser = null;

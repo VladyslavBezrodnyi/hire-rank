@@ -9,27 +9,38 @@ import {Router} from '@angular/router';
 })
 export class AppComponent implements OnInit {
   isCollapsed = false;
-  isVisible = false;
+  isLoginFormVisible = false;
+  isRegisterFormVisible = false;
   isLogged = false;
 
   constructor(private authorizationService: AuthorizationService, private router: Router) {}
 
   ngOnInit(): void {
-    console.log(this.isVisible);
+    this.authorizationService.isLoggedIn.subscribe(x => this.isLogged = x);
   }
 
   showLoginForm() {
-    this.isVisible = true;
+    this.isLoginFormVisible = true;
+  }
+
+  showRegisterForm() {
+    this.isRegisterFormVisible = true;
   }
 
   hideLoginForm() {
-    this.isVisible = false;
+    this.isLoginFormVisible = false;
     this.isLogged = true;
   }
 
-  handleCancel(): void {
-    console.log('Button cancel clicked!');
-    this.isVisible = false;
+  hideRegistrationForm() {
+    this.isRegisterFormVisible = false;
+  }
+
+  handleCancel(form: string): void {
+    if (form == "login")
+      this.isLoginFormVisible = false;
+    else
+      this.isRegisterFormVisible = false;
   }
 
   logOut() {

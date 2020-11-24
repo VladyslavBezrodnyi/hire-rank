@@ -17,7 +17,7 @@ export class ResponseInterceptor implements HttpInterceptor {
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
                     var responseBody = event.body as ApiResponse;
-                    if (responseBody.StatusCode != 200) {
+                    if (responseBody.StatusCode != 200 && responseBody.StatusCode != 201 && responseBody.StatusCode != 203 && responseBody.StatusCode != 204) {
                         if (responseBody.ErrorCode == 1)
                             throw new Error(responseBody.Details);
                         else
