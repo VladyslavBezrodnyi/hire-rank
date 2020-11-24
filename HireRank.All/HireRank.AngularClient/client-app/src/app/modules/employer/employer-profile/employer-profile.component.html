@@ -1,0 +1,42 @@
+<form nz-form [formGroup]="employerForm" (ngSubmit)="submitEmployerForm()">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="companyName">Company name</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Company name is required">
+      <input nz-input id="companyName" formControlName="companyName" [(ngModel)]="employer.companyName"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="companyDescription">Company description</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Company description is required">
+      <input nz-input id="companyDescription" formControlName="companyDescription" [(ngModel)]="employer.companyDescription"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="companyAddress">Company address</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Company address is required">
+      <input nz-input id="companyAddress" formControlName="companyAddress" [(ngModel)]="employer.companyAddress"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="contactPhoneNumber">Contact phone number</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Contact phone number is required">
+      <input nz-input id="contactPhoneNumber" formControlName="contactPhoneNumber" [(ngModel)]="employer.contactPhoneNumber"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="siteUrl">Site URL</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Site URL is required">
+      <input nz-input id="siteUrl" formControlName="siteUrl" [(ngModel)]="employer.siteUrl"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control [nzSpan]="14" [nzOffset]="6">
+      <button nz-button nzType="primary" [disabled]="employerForm.invalid">Save</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
