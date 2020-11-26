@@ -3,15 +3,41 @@ import { CommonModule } from '@angular/common';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import {AdminRoutingModule} from './admin-routing.module';
 import {NgZorroAntdModule} from '../../shared/libraries/ng-zorro-antd/ng-zorro-antd.module';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { AdminCampaignsComponent } from './admin-campaigns/admin-campaigns.component';
+import { NzFilterTriggerComponent, NzTableModule } from 'ng-zorro-antd/table';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { IconsProviderModule } from 'src/app/icons-provider.module';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NZ_ICONS } from 'ng-zorro-antd/icon';
+import { NZ_I18N, en_US, uk_UA } from 'ng-zorro-antd/i18n';
+import { IconDefinition } from '@ant-design/icons-angular';
+import * as AllIcons from '@ant-design/icons-angular/icons';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { CreateCampaignComponent } from './create-campaign/create-campaign.component';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+
+
+const antDesignIcons = AllIcons as {
+  [key: string]: IconDefinition;
+};
+const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key])
 
 @NgModule({
-  declarations: [AdminProfileComponent],
+  declarations: [AdminProfileComponent, AdminCampaignsComponent, CreateCampaignComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
     NgZorroAntdModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    FormsModule,
+    NzTableModule,
+    NzDropDownModule,
+    IconsProviderModule,
+    NzIconModule,
+    NzDatePickerModule,
+    NzMessageModule
+  ],
+  providers:[{ provide: NZ_I18N, useValue: uk_UA }, { provide: NZ_ICONS, useValue: icons }]
 })
 export class AdminModule { }
