@@ -16,6 +16,8 @@ import * as AllIcons from '@ant-design/icons-angular/icons';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { CreateCampaignComponent } from './create-campaign/create-campaign.component';
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { EditCampaignComponent } from './edit-campaign/edit-campaign.component';
 
 
 const antDesignIcons = AllIcons as {
@@ -24,7 +26,7 @@ const antDesignIcons = AllIcons as {
 const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key])
 
 @NgModule({
-  declarations: [AdminProfileComponent, AdminCampaignsComponent, CreateCampaignComponent],
+  declarations: [AdminProfileComponent, AdminCampaignsComponent, CreateCampaignComponent, EditCampaignComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
@@ -36,8 +38,9 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     IconsProviderModule,
     NzIconModule,
     NzDatePickerModule,
-    NzMessageModule
+    NzMessageModule,
+    NzPopconfirmModule
   ],
-  providers:[{ provide: NZ_I18N, useValue: uk_UA }, { provide: NZ_ICONS, useValue: icons }]
+  providers:[{ provide: NZ_I18N, useValue: en_US }, { provide: NZ_ICONS, useValue: icons }]
 })
 export class AdminModule { }
