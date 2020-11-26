@@ -1,0 +1,16 @@
+<p>Відредакувати нову вакансію</p>
+<form nz-form [formGroup]="editForm" (ngSubmit)="submit()">
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Вкажіть назву ярмарки вакансій!">
+        <nz-input-group>
+          <input type="text" nz-input formControlName="name" placeholder="Назва" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Вкажіть строки ярмарки вакансій!">
+        <nz-range-picker formControlName="dates" [nzShowTime]="true"></nz-range-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Створити</button>
+  </form>

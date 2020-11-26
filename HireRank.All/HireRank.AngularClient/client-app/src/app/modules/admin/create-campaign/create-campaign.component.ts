@@ -36,5 +36,4 @@ export class CreateCampaignComponent implements OnInit {
       this.createdEvent.next(false);
     });
   }
-
 }

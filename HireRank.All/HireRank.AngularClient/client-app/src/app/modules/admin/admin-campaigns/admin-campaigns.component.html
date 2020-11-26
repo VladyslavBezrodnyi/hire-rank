@@ -29,6 +29,8 @@
           <i nz-icon nzType="calendar"></i>
         </nz-filter-trigger>
       </th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -36,6 +38,16 @@
       <td>{{ data.name }}</td>
       <td>{{ data.startDate | date:'medium' }}</td>
       <td>{{ data.endDate | date:'medium' }}</td>
+      <td>
+        <a (click)="editCampaign(data)">
+          <i nz-icon nzType="edit" nzTheme="outline"></i>
+        </a>
+      </td>
+      <td>
+        <a nz-popconfirm nzPopconfirmTitle="Ви впевненні, що хочите видалити цю ярмарку?" (nzOnConfirm)="deleteCampaign(data.id)">
+          <i nz-icon nzType="delete" nzTheme="outline"></i>
+        </a>
+      </td>
     </tr>
   </tbody>
 </nz-table>
@@ -79,4 +91,7 @@
 </nz-dropdown-menu>
 <nz-modal [(nzVisible)]="isCreatingFormVisible" nzTitle="Створити" nzFooter=null (nzOnCancel)="isCreatingFormVisible=!isCreatingFormVisible">
   <app-create-campaign (createdEvent)="afterCampaignCreating($event)"></app-create-campaign>
+</nz-modal>
+<nz-modal [(nzVisible)]="isEditingFormVisible" nzTitle="Редагування" nzFooter=null (nzOnCancel)="hideEditingForm()">
+  <app-edit-campaign [campaign]="selectedCampaign" (editedEvent)="afterCampaignEditing($event)"></app-edit-campaign>
 </nz-modal>

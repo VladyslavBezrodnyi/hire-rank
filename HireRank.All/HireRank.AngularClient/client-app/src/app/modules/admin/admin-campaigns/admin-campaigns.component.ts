@@ -6,26 +6,6 @@ import { GetAdminCampaign } from "../../../shared/models/get-admin-campaigns.mod
 import { CampaignService } from "../../../core/services/campaign.service";
 import { NzMessageService } from 'ng-zorro-antd/message';
 
-interface Setting {
-  bordered: boolean;
-  loading: boolean;
-  pagination: boolean;
-  sizeChanger: boolean;
-  title: boolean;
-  header: boolean;
-  footer: boolean;
-  expandable: boolean;
-  checkbox: boolean;
-  fixHeader: boolean;
-  noResult: boolean;
-  ellipsis: boolean;
-  simple: boolean;
-  size: NzTableSize;
-  tableScroll: string;
-  tableLayout: NzTableLayout;
-  position: NzTablePaginationPosition;
-}
-
 @Component({
   selector: 'app-admin-campaigns',
   templateUrl: './admin-campaigns.component.html',
@@ -37,6 +17,9 @@ export class AdminCampaignsComponent implements OnInit {
     totalCount: 1,
     items: new Array<Campaign>()
   };
+
+  selectedCampaign: Campaign;
+
   loading: Boolean = false;
   queryFilter: GetAdminCampaign = new GetAdminCampaign();
   totalСount: 1;
@@ -46,7 +29,8 @@ export class AdminCampaignsComponent implements OnInit {
   nameFilterVisible: boolean = false;
   startDateFilterVisible: false;
   endDateFilterVisible: false;
-  isCreatingFormVisible:boolean = false;
+  isCreatingFormVisible: boolean = false;
+  isEditingFormVisible: boolean = false;
 
   constructor(private campaignService: CampaignService, private messageService: NzMessageService) { }
 
@@ -145,7 +129,38 @@ export class AdminCampaignsComponent implements OnInit {
     this.loadCampaigns();
   }
 
+  afterCampaignEditing(value: boolean) {
+    if (value) {
+      this.messageService.success("Ви успішно відредагували ярмарку вакансій!");
+    }
+    else {
+      this.messageService.error("Трапилась помилка при редагуванні ярмарки вакансій!");
+    }
+    this.hideEditingForm();
+    this.loadCampaigns();
+  }
+
+  deleteCampaign(id: string) {
+    this.campaignService.delete(id).subscribe(result => {
+      this.messageService.success("Ви успішно видалили ярмарку вакансій!");
+      this.loadCampaigns();
+    },
+    error => {
+      this.messageService.error("Трапилась помилка при видаленні ярмарки вакансій!");
+    });
+  }
+  
+
   hideCreatingForm(){
     this.isCreatingFormVisible = !this.isCreatingFormVisible
+  }
+
+  hideEditingForm(){
+    this.isEditingFormVisible = false;
+  }
+
+  editCampaign(campaign: Campaign){
+    this.selectedCampaign = campaign;
+    this.isEditingFormVisible = true;
   }
 }
