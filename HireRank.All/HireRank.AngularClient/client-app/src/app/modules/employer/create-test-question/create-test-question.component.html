@@ -1,0 +1,65 @@
+<p>Створення запитання</p>
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+        <nz-form-label [nzXs]="24" [nzSm]="4" >Питання</nz-form-label>
+        <nz-form-control
+          [nzXs]="24"
+          [nzSm]="20"
+          nzErrorTip="Введіть запитання!"
+        >
+          <input
+            class="passenger-input"
+            nz-input
+            formControlName="text"
+          />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzXs]="24" [nzSm]="4" >Тег</nz-form-label>
+        <nz-form-control
+          [nzXs]="24"
+          [nzSm]="20"
+          nzErrorTip="Введіть тег!"
+        >
+          <input
+            class="passenger-input"
+            nz-input
+            formControlName="tag"
+            [nzAutocomplete]="auto"/>
+          <nz-autocomplete [nzDataSource]="tagOptions" nzBackfill #auto></nz-autocomplete>
+        </nz-form-control>
+      </nz-form-item>
+    <nz-form-item *ngFor="let control of listOfControl; let i = index">
+      <nz-form-label [nzXs]="24" [nzSm]="4" *ngIf="i == 0" [nzFor]="control.controlInstance">Варіанти</nz-form-label>
+      <nz-form-control
+        [nzXs]="24"
+        [nzSm]="20"
+        [nzOffset]="i == 0 ? 0 : 4"
+        nzErrorTip="Введіть текст варіанту"
+      >
+        <input
+          class="passenger-input"
+          nz-input
+          placeholder=""
+          [attr.id]="control.id"
+          [formControlName]="control.controlInstance"
+        />
+        <label [ngModelOptions]="{standalone: true}" nz-checkbox style="margin-right: 5px;" [(ngModel)]="control.isCorrect" (ngModelChange)="checkOptions($event)">Правильна</label>
+        <i nz-icon nzType="minus-circle-o" class="dynamic-delete-button" (click)="removeField(control, $event)"></i>
+        
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 20, offset: 4 }">
+        <button nz-button nzType="dashed" class="add-button" (click)="addField($event)">
+          <i nz-icon nzType="plus"></i>
+          Додати варіант
+        </button>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 20, offset: 4 }">
+        <button nz-button nzType="primary">Підтвердити</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>

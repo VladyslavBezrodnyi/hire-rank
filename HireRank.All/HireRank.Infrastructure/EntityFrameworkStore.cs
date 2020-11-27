@@ -1,6 +1,7 @@
 ﻿using HireRank.Core.Entities;
 using HireRank.Core.Store;
 using HireRank.Infrastructure.Context;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -45,6 +46,14 @@ namespace HireRank.Infrastructure
             return entity;
         }
 
+        public async Task AddEntitiesAsync<TEntity>(List<TEntity> entities, bool saveChanges = false) where TEntity : class
+        {
+            _context.Set<TEntity>().AddRange(entities);
+
+            if (saveChanges)
+                await SaveChangesAsync();
+        }
+
         public async Task UpdateEntityAsync<TEntity>(TEntity entity, bool saveChanges = false) where TEntity : class
         {
             _context.Set<TEntity>().Update(entity);
@@ -56,6 +65,14 @@ namespace HireRank.Infrastructure
         public async Task DeleteEntityAsync<TEntity>(TEntity entity, bool saveChanges = false) where TEntity : class
         {
             _context.Set<TEntity>().Remove(entity);
+
+            if (saveChanges)
+                await SaveChangesAsync();
+        }
+
+        public async Task DeleteEntitiesAsync<TEntity>(List<TEntity> entities, bool saveChanges = false) where TEntity : class
+        {
+            _context.Set<TEntity>().RemoveRange(entities);
 
             if (saveChanges)
                 await SaveChangesAsync();

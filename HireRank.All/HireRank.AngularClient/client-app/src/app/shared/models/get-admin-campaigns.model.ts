@@ -1,5 +1,3 @@
-import { asapScheduler } from "rxjs";
-
 export class GetAdminCampaign {
     pageNumber: number;
     pageSize: number;

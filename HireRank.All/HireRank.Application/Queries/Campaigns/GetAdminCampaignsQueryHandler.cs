@@ -31,7 +31,7 @@ namespace HireRank.Application.Queries.Campaigns
             return await _store.Campaigns
                 .AsNoTracking()
                 .Where(x => x.AdminId == adminId)
-                .ApplyQuery<Campaign, CampaignViewModel>(request, _mapper.ConfigurationProvider);
+                .ApplyQueryAsync<Campaign, CampaignViewModel>(request, _mapper.ConfigurationProvider);
                 
         }
     }

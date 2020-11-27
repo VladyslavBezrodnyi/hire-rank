@@ -1,0 +1,82 @@
+<p>Тестова база</p>
+<button nz-button nzType="primary" style="margin-bottom: 10px;" (click)="isCreatingModalVisible=true">Додати</button>
+
+<nz-table
+  nzShowSizeChanger 
+  [nzData]="questions.items" 
+  [nzFrontPagination]="false"
+  [nzLoading]="loading"
+  [nzTotal]="questions.totalCount"
+  [nzPageSize]="queryFilter.pageSize"
+  [nzPageIndex]="queryFilter.pageNumber" 
+  (nzQueryParams)="onQueryParamsChange($event)">
+  <thead>
+    <tr>
+      <th nzColumnKey="Text" [nzSortFn]="true" nzCustomFilter>
+        Текст запитання
+        <nz-filter-trigger [(nzVisible)]="textFilterVisible" [nzActive]="textFilter.length > 0" [nzDropdownMenu]="textFilterMenu">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+      </th>
+      <th nzColumnKey="QuestionTag" [nzSortFn]="true" nzCustomFilter>
+        Тег
+        <nz-filter-trigger [(nzVisible)]="tagFilterVisible" [nzActive]="textFilter.length > 0" [nzDropdownMenu]="tagFiltersMenu">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+      </th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of questions.items">
+      <td>{{ data.text }}</td>
+      <td> <nz-tag nzColor="{{tagColors[data.questionTag]}}">{{ data.questionTag }}</nz-tag></td>
+      <td>
+        <a (click)="openEditingForm(data.id)">
+          <i nz-icon nzType="edit" nzTheme="outline"></i>
+        </a>
+      </td>
+      <td>
+        <a nz-popconfirm nzPopconfirmTitle="Ви впевненні, що хочите видалити це питання?" (nzOnConfirm)="deleteQuestion(data.id)">
+          <i nz-icon nzType="delete" nzTheme="outline"></i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+
+<nz-modal [(nzVisible)]="isCreatingModalVisible"  nzFooter=null (nzOnCancel)="hideCreatingForm()" style="width: 60%;">
+    <app-create-test-question (createdEvent)="afterQuestionCreating($event)"></app-create-test-question>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="isEditingFormVisible" nzFooter=null (nzOnCancel)="hideEditingForm()" style="width: 60%;">
+  <app-edit-test-question [question]="selectedQuestion" (editedEvent)="afterQuestionEditing($event)"></app-edit-test-question>
+</nz-modal>
+
+
+<nz-dropdown-menu #textFilterMenu="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+      <div class="search-box">
+        <input [(ngModel)]="textFilter" style="margin: 5px;" type="text" nz-input placeholder="Питання"/>
+        <button nz-button  style="margin-right: 5px;" nzSize="small" nzType="primary" (click)="searchByText()" class="search-button">
+          Пошук
+        </button>
+        <button nz-button style="margin-right: 5px;" nzSize="small" (click)="resetFilterByText()">Очистити</button>
+      </div>
+    </div>
+</nz-dropdown-menu>
+
+  
+
+<nz-dropdown-menu #tagFiltersMenu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <nz-checkbox-group class="tag-filters" [(ngModel)]="tagOptions"></nz-checkbox-group>
+      <button nz-button nzSize="small" nzType="primary" (click)="searchByTags()" class="search-button">
+        Пошук
+      </button>
+      <button nz-button nzSize="small" (click)="resetFilterByTags()">Очистити</button>
+    </div>
+  </div>
+</nz-dropdown-menu>
