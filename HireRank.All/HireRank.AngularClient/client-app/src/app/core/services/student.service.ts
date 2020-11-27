@@ -8,15 +8,15 @@ import {Student} from '../../shared/models/student.model';
   providedIn: 'root'
 })
 export class StudentService {
-  controllerUrl: string = environment.apiUrl + '';
+  controllerUrl: string = environment.apiUrl + '/student/';
 
   constructor(private http: HttpClient) { }
 
   edit(student: Student): Observable<Student> {
-    return this.http.put<Student>(this.controllerUrl + '', student);
+    return this.http.put<Student>(this.controllerUrl + 'update', student);
   }
 
   get(): Observable<Student> {
-    return this.http.get<Student>(this.controllerUrl + '');
+    return this.http.get<Student>(this.controllerUrl + 'profile');
   }
 }

@@ -8,15 +8,15 @@ import {Employer} from '../../shared/models/employer.model';
   providedIn: 'root'
 })
 export class EmployerService {
-  controllerUrl: string = environment.apiUrl + '';
+  controllerUrl: string = environment.apiUrl + '/employer/';
 
   constructor(private http: HttpClient) { }
 
   edit(employer: Employer): Observable<Employer> {
-    return this.http.put<Employer>(this.controllerUrl + '', employer);
+    return this.http.put<Employer>(this.controllerUrl + 'update', employer);
   }
 
   get(): Observable<Employer> {
-    return this.http.get<Employer>(this.controllerUrl + '');
+    return this.http.get<Employer>(this.controllerUrl + 'profile');
   }
 }

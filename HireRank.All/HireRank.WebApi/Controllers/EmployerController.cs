@@ -1,47 +1,47 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using HireRank.Application.Commands.Employers;
+using HireRank.Application.Queries.Employer;
+using HireRank.Application.ViewModels;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace HireRank.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/employer")]
     [ApiController]
     public class EmployerController : ControllerBase
     {
-        // GET: api/<EmployerController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IMediator _mediator;
+
+        public EmployerController(IMediator mediator)
         {
-            return new string[] { "value1", "value2" };
+            _mediator = mediator;
         }
 
-        // GET api/<EmployerController>/5
+        [Authorize(Roles = "employer")]
+        [HttpGet("profile")]
+        public async Task<EmployerViewModel> GetEmployerAsync()
+        {
+            GetEmployerByIdQuery request = new GetEmployerByIdQuery(Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+            return await _mediator.Send(request);
+        }
+
+        [Authorize]
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<EmployerViewModel> GetEmployerAsync(Guid id)
         {
-            return "value";
+            GetEmployerByIdQuery request = new GetEmployerByIdQuery(id);
+            return await _mediator.Send(request);
         }
 
-        // POST api/<EmployerController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [Authorize(Roles = "employer")]
+        [HttpPut("update")]
+        public async Task<EmployerViewModel> UpdateStudentAsync([FromBody] UpdateEmployerCommand command)
         {
-        }
-
-        // PUT api/<EmployerController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<EmployerController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return await _mediator.Send(command);
         }
     }
 }
