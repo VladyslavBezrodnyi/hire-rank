@@ -10,7 +10,7 @@ namespace HireRank.Application.Filtering
 {
     public static class IQueryableExtensions
     {
-        public static async Task<PagedResult<TViewModel>> ApplyQuery<T, TViewModel>(this IQueryable<T> entities,
+        public static async Task<PagedResult<TViewModel>> ApplyQueryAsync<T, TViewModel>(this IQueryable<T> entities,
                                                                                     IQuery<T> query,
                                                                                     IConfigurationProvider mappingProvider) where T : class
         {

@@ -1,4 +1,5 @@
 ﻿using HireRank.Core.Entities;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,9 +29,13 @@ namespace HireRank.Core.Store
 
         Task<TEntity> AddEntityAsync<TEntity>(TEntity entity, bool saveChanges = false) where TEntity : class;
 
+        Task AddEntitiesAsync<TEntity>(List<TEntity> entities, bool saveChanges = false) where TEntity : class;
+
         Task UpdateEntityAsync<TEntity>(TEntity entity, bool saveChanges = false) where TEntity : class;
 
         Task DeleteEntityAsync<TEntity>(TEntity entity, bool saveChanges = false) where TEntity : class;
+
+        Task DeleteEntitiesAsync<TEntity>(List<TEntity> entities, bool saveChanges = false) where TEntity : class;
 
         Task SaveChangesAsync();
     }
