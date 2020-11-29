@@ -70,6 +70,9 @@ namespace HireRank.Application.Commands.Testing
                 Priority = priority
             };
 
+            await _store.AddEntityAsync(newStudentVacancy);
+            await _store.SaveChangesAsync();
+
             return score;
         }
     }

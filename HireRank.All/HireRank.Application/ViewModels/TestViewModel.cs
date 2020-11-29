@@ -4,7 +4,10 @@ using System.Text;
 
 namespace HireRank.Application.ViewModels
 {
-    class TestViewModel
+    public class TestViewModel
     {
+        public Guid VacancyId { get; set; }
+
+        public List<TestQuestionViewModel> Questions { get; set; }
     }
 }
