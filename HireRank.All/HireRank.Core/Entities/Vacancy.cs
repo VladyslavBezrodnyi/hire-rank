@@ -10,6 +10,8 @@ namespace HireRank.Core.Entities
 
         public string Title { get; set; }
 
+        public string Description { get; set; }
+
         public int TestSize { get; set; }
 
         public Guid CampaignId { get; set; }
@@ -19,6 +21,8 @@ namespace HireRank.Core.Entities
         public Guid EmployerId { get; set; }
 
         public Employer Employer { get; set; }
+
+        public DateTime DateCreated { get; set; }
 
         public ICollection<VacancyQuestion> VacancyQuestions { get; set; } = new HashSet<VacancyQuestion>();
 
