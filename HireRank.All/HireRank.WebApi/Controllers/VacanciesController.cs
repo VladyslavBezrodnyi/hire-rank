@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using HireRank.Application.Commands.Vacancies;
 using HireRank.Application.Filtering;
@@ -10,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HireRank.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/vacancies")]
     [ApiController]
     public class VacanciesController : ControllerBase
     {
@@ -49,5 +50,15 @@ namespace HireRank.WebApi.Controllers
         [HttpDelete("{id}")]
         public async Task<Guid> UpdateVacancyAsync(Guid id)
             => await _mediator.Send(new DeleteVacancyCommand() { Id = id });
+
+        [Authorize(Roles = "student")]
+        [HttpGet("student/{studentId}")]
+        public async Task<List<VacancyViewModel>> GetAllStudentVacanciesAsync(Guid studentId) 
+            => await _mediator.Send(new GetAllVacanciesByStudentIdQuery(studentId));
+
+        [Authorize(Roles = "student")]
+        [HttpPost("assign-priority")]
+        public async Task<Guid> Post([FromBody] AssignVacancyPriorityCommand command)
+            => await _mediator.Send(command);
     }
 }
