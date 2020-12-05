@@ -13,6 +13,10 @@ namespace HireRank.Application.ViewModels.Shared
 
         public int TestSize { get; set; }
 
+        public DateTime DateCreated { get; set; }
+
+        public EmployerViewModel Employer { get; set; }
+
         public CampaignViewModel Campaign { get; set; }
     }
 }

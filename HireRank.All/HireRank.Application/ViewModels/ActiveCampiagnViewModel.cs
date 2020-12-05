@@ -2,7 +2,7 @@
 
 namespace HireRank.Application.ViewModels
 {
-    public class ActiveCampiangViewModel
+    public class ActiveCampiagnViewModel
     {
         public Guid Id { get; set; }
 

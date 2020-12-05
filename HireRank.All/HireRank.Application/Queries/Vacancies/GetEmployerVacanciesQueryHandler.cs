@@ -31,6 +31,7 @@ namespace HireRank.Application.Queries.Vacancies
 
             var vacancies = await _store.Vacancies
                 .Include(x => x.Campaign)
+                .Include(x => x.Employer)
                 .Where(x => x.EmployerId == employerId)
                 .ApplyQueryAsync<Vacancy, VacancyViewModel>(request, _mapper.ConfigurationProvider);
 

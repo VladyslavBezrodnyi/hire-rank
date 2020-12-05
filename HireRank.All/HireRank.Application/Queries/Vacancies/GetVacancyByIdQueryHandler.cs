@@ -22,7 +22,10 @@ namespace HireRank.Application.Queries.Vacancies
 
         public async Task<VacancyViewModel> Handle(GetVacancyByIdQuery request, CancellationToken cancellationToken)
         {
-            var vacancy = await _store.Vacancies.AsNoTracking().Include(x => x.Campaign).WithIdAsync(request.Id);
+            var vacancy = await _store.Vacancies.AsNoTracking()
+                .Include(x => x.Campaign)
+                .Include(x => x.Employer)
+                .WithIdAsync(request.Id);
 
             var vacancyViewModel = _mapper.Map<VacancyViewModel>(vacancy);
 

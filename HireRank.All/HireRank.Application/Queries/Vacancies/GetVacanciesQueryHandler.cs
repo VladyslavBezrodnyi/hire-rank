@@ -2,9 +2,11 @@
 using HireRank.Application.Filtering;
 using HireRank.Application.ViewModels.Shared;
 using HireRank.Core.Entities;
+using HireRank.Core.Extensions;
 using HireRank.Core.Store;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,6 +27,8 @@ namespace HireRank.Application.Queries.Vacancies
         {
             var vacancies = await _store.Vacancies
                 .Include(x => x.Campaign)
+                .Include(x => x.Employer)
+                .Where(x => x.Campaign.IsActive())
                 .ApplyQueryAsync<Vacancy, VacancyViewModel>(request, _mapper.ConfigurationProvider);
 
             return vacancies;
