@@ -11,6 +11,7 @@ import {NzDatePickerModule} from 'ng-zorro-antd/date-picker';
 import {NzButtonModule} from 'ng-zorro-antd/button';
 import {NzTabsModule} from 'ng-zorro-antd/tabs';
 import {NzModalModule} from 'ng-zorro-antd/modal';
+import {NzTableModule} from 'ng-zorro-antd/table';
 
 @NgModule({
   declarations: [],
@@ -25,7 +26,8 @@ import {NzModalModule} from 'ng-zorro-antd/modal';
     NzDatePickerModule,
     NzButtonModule,
     NzTabsModule,
-    NzModalModule
+    NzModalModule,
+    NzTableModule
   ],
   exports: [
     NzLayoutModule,
@@ -37,7 +39,8 @@ import {NzModalModule} from 'ng-zorro-antd/modal';
     NzDatePickerModule,
     NzButtonModule,
     NzTabsModule,
-    NzModalModule
+    NzModalModule,
+    NzTableModule
   ]
 })
 export class NgZorroAntdModule { }

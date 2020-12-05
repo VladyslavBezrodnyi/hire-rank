@@ -8,6 +8,7 @@ import { Vacancy } from "../../shared/models/vacancy.model";
 import { GetEmployerVacancies } from "../../shared/models/get-employer-vacancies.model";
 import { GetVacancies } from "../../shared/models/get-vacancies.model";
 import { EmployerVacancy } from "../../shared/models/employer-vacancy.model";
+import { AssignVacancyPriorityModel } from 'src/app/shared/models/assign-vacancy-priority.model';
 
 @Injectable({
     providedIn: 'root'
@@ -93,4 +94,12 @@ export class VacancyService {
     delete(id: string): Observable<string> {
         return this.http.delete<string>(this.controllerUrl + "/" + id);
     }
+
+    assignPriority(assignVacancyPriorityModel: AssignVacancyPriorityModel): Observable<string> {
+        return this.http.post<string>(this.controllerUrl + '/assign-priority', assignVacancyPriorityModel);
+      }
+    
+      getAllStudentVacancies(studentId: number): Observable<Vacancy[]> {
+        return this.http.get<Vacancy[]>(this.controllerUrl + '/student/' + studentId.toString());
+      }
 }
