@@ -7,6 +7,8 @@ using HireRank.Application.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using HireRank.Application.Queries.Selection;
+using System.Collections.Generic;
 
 namespace HireRank.WebApi.Controllers
 {
@@ -42,6 +44,14 @@ namespace HireRank.WebApi.Controllers
         public async Task<EmployerViewModel> UpdateEmployerAsync([FromBody] UpdateEmployerCommand command)
         {
             return await _mediator.Send(command);
+        }
+
+        [Authorize(Roles = "employer")]
+        [HttpGet("getstudentsforvacansions/{id}")]
+        public async Task<List<StudentVacancyViewModel>> GetVacancyStudentsAsync(Guid id)
+        {
+            GetSelectionQuery request = new GetSelectionQuery(id);
+            return await _mediator.Send(request);
         }
     }
 }

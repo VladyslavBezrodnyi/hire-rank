@@ -28,6 +28,7 @@ namespace HireRank.Infrastructure.Mapping
             CreateMap<Vacancy, VacancyViewModel>();
             CreateMap<Question, TestQuestionViewModel>();
             CreateMap<Option, TestOptionViewModel>();
+            CreateMap<StudentVacancy, StudentVacancyViewModel>();
         }
 
         private void MapCommands()
