@@ -47,7 +47,7 @@ namespace HireRank.WebApi.Controllers
         }
 
         [Authorize(Roles = "employer")]
-        [HttpGet("getstudentsforvacansions/{id}")]
+        [HttpGet("vacancy-rating/{id}")]
         public async Task<List<StudentVacancyViewModel>> GetVacancyStudentsAsync(Guid id)
         {
             GetSelectionQuery request = new GetSelectionQuery(id);

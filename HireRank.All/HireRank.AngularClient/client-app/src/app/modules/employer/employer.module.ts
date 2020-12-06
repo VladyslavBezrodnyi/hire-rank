@@ -22,9 +22,19 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
 import { EmployerVacanciesComponent } from './employer-vacancies/employer-vacancies.component';
 import { CreateVacancyComponent } from './create-vacancy/create-vacancy.component';
 import { EditVacancyComponent } from './edit-vacancy/edit-vacancy.component';
+import { VacancyRatingComponent } from './vacancy-rating/vacancy-rating.component';
 
 @NgModule({
-  declarations: [EmployerProfileComponent, CreateTestQuestionComponent, EditTestQuestionComponent, TestQuestionsComponent, EmployerVacanciesComponent, CreateVacancyComponent, EditVacancyComponent],
+  declarations: [
+    EmployerProfileComponent,
+    CreateTestQuestionComponent,
+    EditTestQuestionComponent,
+    TestQuestionsComponent,
+    EmployerVacanciesComponent,
+    CreateVacancyComponent,
+    EditVacancyComponent,
+    VacancyRatingComponent
+  ],
   imports: [
     CommonModule,
     NgZorroAntdModule,
