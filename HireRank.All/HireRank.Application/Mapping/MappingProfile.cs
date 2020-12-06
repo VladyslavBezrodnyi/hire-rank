@@ -3,6 +3,7 @@ using HireRank.Application.Commands.Account;
 using HireRank.Application.Commands.Questions;
 using HireRank.Application.Queries.Campaigns;
 using HireRank.Application.ViewModels;
+using HireRank.Application.ViewModels.Shared;
 using HireRank.Core.Entities;
 
 namespace HireRank.Infrastructure.Mapping
@@ -22,6 +23,8 @@ namespace HireRank.Infrastructure.Mapping
             CreateMap<Option, OptionViewModel>();
             CreateMap<Student, StudentViewModel>();
             CreateMap<Employer, EmployerViewModel>();
+            CreateMap<Vacancy, VacancyViewModel>();
+            CreateMap<StudentVacancy, StudentVacancyViewModel>();
         }
 
         private void MapCommands()

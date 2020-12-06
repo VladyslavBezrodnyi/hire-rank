@@ -1,7 +1,5 @@
-﻿using HireRank.Core.Entities;
+﻿using HireRank.Application.ViewModels.Shared;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HireRank.Application.ViewModels
 {
@@ -9,13 +7,9 @@ namespace HireRank.Application.ViewModels
     {
         public Guid Id { get; set; }
 
-        public Guid StudentId { get; set; }
+        public StudentViewModel Student { get; set; }
 
-        public Student Student { get; set; }
-
-        public Guid VacancyId { get; set; }
-
-        public Vacancy Vacancy { get; set; }
+        public VacancyViewModel Vacancy { get; set; }
 
         public short Score { get; set; }
 
