@@ -1,0 +1,89 @@
+<p>Вакансії</p>
+<button nz-button nzType="primary" style="margin-bottom: 10px;" (click)="isCreatingModalVisible=true">Створити нову</button>
+
+<nz-table
+  nzShowSizeChanger 
+  [nzData]="vacancies.items" 
+  [nzFrontPagination]="false"
+  [nzLoading]="loading"
+  [nzTotal]="vacancies.totalCount"
+  [nzPageSize]="queryFilter.pageSize"
+  [nzPageIndex]="queryFilter.pageNumber" 
+  (nzQueryParams)="onQueryParamsChange($event)">
+  <thead>
+    <tr>
+      <th nzColumnKey="Title" [nzSortFn]="true" nzCustomFilter>
+        Назва
+        <nz-filter-trigger [(nzVisible)]="titleFilterVisible" [nzActive]="titleFilter.length > 0" [nzDropdownMenu]="titleFilterMenu">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+      </th>
+      <th nzCustomFilter>
+        Ярмарка вакансій
+        <nz-filter-trigger [(nzVisible)]="campiagnIdFilterVisible" [nzActive]="campiagnIdFilters.length > 0" [nzDropdownMenu]="campaignFiltersMenu">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+      </th>
+      <th nzColumnKey="DateCreated" [nzSortFn]="true" nzCustomFilter>
+        Дата відкриття
+        <nz-filter-trigger [(nzVisible)]="titleFilterVisible" [nzActive]="titleFilter.length > 0" [nzDropdownMenu]="titleFilterMenu">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+      </th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of vacancies.items">
+      <td>{{ data.title }}</td>
+      <td> {{ data.campaign.name }}</td>
+      <td> {{ data.dateCreated }}</td>
+      <td>
+        <a (click)="openEditingForm(data.id)">
+          <i nz-icon nzType="edit" nzTheme="outline"></i>
+        </a>
+      </td>
+      <td>
+        <a nz-popconfirm nzPopconfirmTitle="Ви впевненні, що хочите видалити цю вакансію?" (nzOnConfirm)="deleteVacancy(data.id)">
+          <i nz-icon nzType="delete" nzTheme="outline"></i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+
+<nz-modal [(nzVisible)]="isCreatingModalVisible"  nzFooter=null (nzOnCancel)="hideCreatingForm()" style="width: 60%;">
+    <app-create-vacancy (createdEvent)="afterVacancyCreating($event)"></app-create-vacancy>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="isEditingFormVisible" nzFooter=null (nzOnCancel)="hideEditingForm()" style="width: 60%;">
+  <app-edit-vacancy [vacancy]="selectedVacancy" (editedEvent)="afterVacancyEditing($event)"></app-edit-vacancy>
+</nz-modal>
+
+
+<nz-dropdown-menu #titleFilterMenu="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+      <div class="search-box">
+        <input [(ngModel)]="titleFilter" style="margin: 5px;" type="text" nz-input placeholder="Назва"/>
+        <button nz-button  style="margin-right: 5px;" nzSize="small" nzType="primary" (click)="searchByTitle()" class="search-button">
+          Пошук
+        </button>
+        <button nz-button style="margin-right: 5px;" nzSize="small" (click)="resetFilterByTitle()">Очистити</button>
+      </div>
+    </div>
+</nz-dropdown-menu>
+
+  
+
+<nz-dropdown-menu #campaignFiltersMenu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <nz-checkbox-group class="campaign-filters" [(ngModel)]="campaignIdOptions"></nz-checkbox-group>
+      <button nz-button nzSize="small" nzType="primary" (click)="searchByCampaign()" class="search-button">
+        Пошук
+      </button>
+      <button nz-button nzSize="small" (click)="resetFilterByCampaign()">Очистити</button>
+    </div>
+  </div>
+</nz-dropdown-menu>

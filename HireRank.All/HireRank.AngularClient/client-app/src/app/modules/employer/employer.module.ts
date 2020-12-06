@@ -19,9 +19,12 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { HttpClientModule } from '@angular/common/http';
 import { NzTagModule } from 'ng-zorro-antd/tag';
+import { EmployerVacanciesComponent } from './employer-vacancies/employer-vacancies.component';
+import { CreateVacancyComponent } from './create-vacancy/create-vacancy.component';
+import { EditVacancyComponent } from './edit-vacancy/edit-vacancy.component';
 
 @NgModule({
-  declarations: [EmployerProfileComponent, CreateTestQuestionComponent, EditTestQuestionComponent, TestQuestionsComponent],
+  declarations: [EmployerProfileComponent, CreateTestQuestionComponent, EditTestQuestionComponent, TestQuestionsComponent, EmployerVacanciesComponent, CreateVacancyComponent, EditVacancyComponent],
   imports: [
     CommonModule,
     NgZorroAntdModule,

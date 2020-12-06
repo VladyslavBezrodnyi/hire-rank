@@ -1,6 +1,7 @@
 ﻿using HireRank.Application.Commands.Campaigns;
 using HireRank.Application.Filtering;
 using HireRank.Application.Queries.Campaigns;
+using HireRank.Application.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -56,6 +57,12 @@ namespace HireRank.WebApi.Controllers
         public async Task<PagedResult<CampaignViewModel>> GetAdminCampaignsAsync([FromQuery]GetAdminCampaignsQuery query)
         {
             return await _mediator.Send(query);
+        }
+
+        [HttpGet("active")]
+        public async Task<List<ActiveCampiagnViewModel>> GetActiveCampaignsAsync()
+        {
+            return await _mediator.Send(new GetActiveCampiagnsQuery());
         }
     }
 }

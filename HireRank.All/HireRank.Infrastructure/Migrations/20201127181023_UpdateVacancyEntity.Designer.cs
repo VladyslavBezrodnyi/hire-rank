@@ -4,14 +4,16 @@ using HireRank.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HireRank.Infrastructure.Migrations
 {
     [DbContext(typeof(HireRankContext))]
-    partial class HireRankContextModelSnapshot : ModelSnapshot
+    [Migration("20201127181023_UpdateVacancyEntity")]
+    partial class UpdateVacancyEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

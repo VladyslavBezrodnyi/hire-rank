@@ -22,6 +22,10 @@ import { GetAdminCampaign } from "../../shared/models/get-admin-campaigns.model"
       return this.http.get<Campaign[]>(this.controllerUrl);
     }
 
+    getActive() : Observable<Campaign[]> {
+      return this.http.get<Campaign[]>(this.controllerUrl + '/active');
+    }
+
     getAdminCampaigns(model: GetAdminCampaign): Observable<PagedResult<Campaign>> {
       let params = new HttpParams();
 

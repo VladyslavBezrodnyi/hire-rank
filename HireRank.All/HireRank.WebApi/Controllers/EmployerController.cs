@@ -41,7 +41,7 @@ namespace HireRank.WebApi.Controllers
 
         [Authorize(Roles = "employer")]
         [HttpPut("update")]
-        public async Task<EmployerViewModel> UpdateStudentAsync([FromBody] UpdateEmployerCommand command)
+        public async Task<EmployerViewModel> UpdateEmployerAsync([FromBody] UpdateEmployerCommand command)
         {
             return await _mediator.Send(command);
         }

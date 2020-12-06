@@ -28,7 +28,6 @@ export class QuestionService {
       model.tags.forEach((tag) => {
         params = params.append(`Tags`, tag);
       });
-      console.log(params);
     }
 
     if (model.pageNumber)
