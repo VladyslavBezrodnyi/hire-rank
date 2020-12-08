@@ -1,4 +1,4 @@
-<p>Вакансії</p>
+
 <button nz-button nzType="primary" style="margin-bottom: 10px;" (click)="isCreatingModalVisible=true">Створити нову</button>
 
 <nz-table
@@ -24,11 +24,8 @@
           <i nz-icon nzType="search"></i>
         </nz-filter-trigger>
       </th>
-      <th nzColumnKey="DateCreated" [nzSortFn]="true" nzCustomFilter>
+      <th nzColumnKey="DateCreated" [nzSortFn]="true" >
         Дата відкриття
-        <nz-filter-trigger [(nzVisible)]="titleFilterVisible" [nzActive]="titleFilter.length > 0" [nzDropdownMenu]="titleFilterMenu">
-          <i nz-icon nzType="search"></i>
-        </nz-filter-trigger>
       </th>
       <th></th>
       <th></th>
@@ -38,7 +35,7 @@
     <tr *ngFor="let data of vacancies.items">
       <td>{{ data.title }}</td>
       <td> {{ data.campaign.name }}</td>
-      <td> {{ data.dateCreated }}</td>
+      <td> {{ data.dateCreated | date:'medium' }} </td>
       <td>
         <a (click)="openEditingForm(data.id)">
           <i nz-icon nzType="edit" nzTheme="outline"></i>

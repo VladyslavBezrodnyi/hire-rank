@@ -70,6 +70,7 @@ export class EmployerVacanciesComponent implements OnInit {
       this.selectedVacancy.title = x.title;
       this.selectedVacancy.description = x.description;
       this.selectedVacancy.campaignId = x.campaign.id;
+      this.selectedVacancy.testSize = x.testSize;
       this.isEditingFormVisible = true;
     });
   }
@@ -126,14 +127,14 @@ searchByCampaign() {
   this.loadVacancies();
 }
 
-resetFilterByTags() {
+resetFilterByCampaign() {
   this.campaignIdOptions.forEach(element => {
     element.checked = false
   })
 }
 
 deleteVacancy(id: string) {
-  this.campaignService.delete(id).subscribe(result => {
+  this.vacancyService.delete(id).subscribe(result => {
     this.messageService.success("Ви успішно видалили вакансію!");
     this.loadVacancies();
   },

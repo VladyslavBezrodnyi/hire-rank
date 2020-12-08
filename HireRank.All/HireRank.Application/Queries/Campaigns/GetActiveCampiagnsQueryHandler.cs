@@ -26,7 +26,8 @@ namespace HireRank.Application.Queries.Campaigns
 
         public async Task<List<ActiveCampiagnViewModel>> Handle(GetActiveCampiagnsQuery request, CancellationToken cancellationToken)
         {
-            var activeCampaigns = await _store.Campaigns.Where(x => x.IsActive())
+            var activeCampaigns = await _store.Campaigns
+                .Active()
                 .OrderBy(x => x.Name)
                 .ProjectTo<ActiveCampiagnViewModel>(_mapper.ConfigurationProvider)
                 .ToListAsync();

@@ -17,12 +17,13 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
-import { HttpClientModule } from '@angular/common/http';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { EmployerVacanciesComponent } from './employer-vacancies/employer-vacancies.component';
 import { CreateVacancyComponent } from './create-vacancy/create-vacancy.component';
 import { EditVacancyComponent } from './edit-vacancy/edit-vacancy.component';
 import { VacancyRatingComponent } from './vacancy-rating/vacancy-rating.component';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,9 @@ import { VacancyRatingComponent } from './vacancy-rating/vacancy-rating.componen
     NzAutocompleteModule,
     FormsModule,
     NzPopconfirmModule,
-    NzTagModule
+    NzTagModule,
+    NzInputNumberModule,
+    NzRadioModule
   ]
 })
 export class EmployerModule { }
