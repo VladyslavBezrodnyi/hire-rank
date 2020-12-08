@@ -1,0 +1,41 @@
+<nz-table
+nzShowSizeChanger
+[nzData]="vacancies.items"
+[nzFrontPagination]="false"
+[nzLoading]="loading"
+[nzTotal]="vacancies.totalCount"
+[nzPageSize]="queryFilter.pageSize"
+[nzPageIndex]="queryFilter.pageNumber"
+>
+<thead>
+  <tr>
+    <th nzColumnKey="Title" [nzSortFn]="true" nzCustomFilter>
+      Назва
+    </th>
+    <th nzCustomFilter>
+      Ярмарка вакансій
+    </th>
+    <th nzColumnKey="DateCreated" [nzSortFn]="true" nzCustomFilter>
+      Дата відкриття
+    </th>
+    <th></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+  <tr *ngFor="let data of vacancies.items">
+    <td>{{ data.title }}</td>
+    <td> {{ data.campaign.name }}</td>
+    <td> {{ data.dateCreated }}</td>
+    <td>
+      <!--
+      <a (click)="openEditingForm(data.id)">
+        <i nz-icon nzType="edit" nzTheme="outline"></i>
+      </a>
+      -->
+    </td>
+    <td>
+    </td>
+  </tr>
+</tbody>
+</nz-table>

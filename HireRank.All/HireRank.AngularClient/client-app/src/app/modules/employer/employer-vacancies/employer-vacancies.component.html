@@ -2,13 +2,13 @@
 <button nz-button nzType="primary" style="margin-bottom: 10px;" (click)="isCreatingModalVisible=true">Створити нову</button>
 
 <nz-table
-  nzShowSizeChanger 
-  [nzData]="vacancies.items" 
+  nzShowSizeChanger
+  [nzData]="vacancies.items"
   [nzFrontPagination]="false"
   [nzLoading]="loading"
   [nzTotal]="vacancies.totalCount"
   [nzPageSize]="queryFilter.pageSize"
-  [nzPageIndex]="queryFilter.pageNumber" 
+  [nzPageIndex]="queryFilter.pageNumber"
   (nzQueryParams)="onQueryParamsChange($event)">
   <thead>
     <tr>
@@ -58,7 +58,7 @@
 </nz-modal>
 
 <nz-modal [(nzVisible)]="isEditingFormVisible" nzFooter=null (nzOnCancel)="hideEditingForm()" style="width: 60%;">
-  <app-edit-vacancy [vacancy]="selectedVacancy" (editedEvent)="afterVacancyEditing($event)"></app-edit-vacancy>
+  <!--<app-edit-vacancy [vacancy]="selectedVacancy" (editedEvent)="afterVacancyEditing($event)"></app-edit-vacancy>-->
 </nz-modal>
 
 
@@ -74,7 +74,7 @@
     </div>
 </nz-dropdown-menu>
 
-  
+
 
 <nz-dropdown-menu #campaignFiltersMenu="nzDropdownMenu">
   <div class="ant-table-filter-dropdown">
@@ -83,7 +83,7 @@
       <button nz-button nzSize="small" nzType="primary" (click)="searchByCampaign()" class="search-button">
         Пошук
       </button>
-      <button nz-button nzSize="small" (click)="resetFilterByCampaign()">Очистити</button>
+      <!--<button nz-button nzSize="small" (click)="resetFilterByCampaign()">Очистити</button>-->
     </div>
   </div>
 </nz-dropdown-menu>

@@ -76,11 +76,7 @@ export class VacancyService {
         if (model.sortingProperty)
             params = params.set("Sorting.SortingProperty", model.sortingProperty?.toString());
 
-        return this.http.get<PagedResult<Vacancy>>(this.controllerUrl + '/employer', { params: params });
-    }
-
-    getActive(): Observable<Campaign[]> {
-        return this.http.get<Campaign[]>(this.controllerUrl + '/active');
+        return this.http.get<PagedResult<Vacancy>>(this.controllerUrl, { params: params });
     }
 
     create(vacancy: EmployerVacancy): Observable<string> {
