@@ -1,0 +1,97 @@
+<h2 style="margin-right: auto; margin-left: auto; margin-top: 10px; margin-bottom: 10px;">Управління ярмарками вакансій</h2>
+<button nz-button nzType="primary" style="margin-bottom: 10px;" (click)="isCreatingFormVisible=!isCreatingFormVisible">Створити нову ярмарку</button>
+<nz-table
+  nzShowSizeChanger 
+  [nzData]="campaigns.items" 
+  [nzFrontPagination]="false"
+  [nzLoading]="loading"
+  [nzTotal]="campaigns.totalCount"
+  [nzPageSize]="queryFilter.pageSize"
+  [nzPageIndex]="queryFilter.pageNumber" 
+  (nzQueryParams)="onQueryParamsChange($event)">
+  <thead>
+    <tr>
+      <th nzColumnKey="Name" [nzSortFn]="true" nzCustomFilter>
+        Назва
+        <nz-filter-trigger [(nzVisible)]="nameFilterVisible" [nzActive]="nameFilter.length > 0" [nzDropdownMenu]="nameFilterMenu">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+      </th>
+      <th nzColumnKey="StartDate" [nzSortFn]="true" nzCustomFilter>
+        Початок
+        <nz-filter-trigger [(nzVisible)]="startDateFilterVisible" [nzActive]="startDateFilter && startDateFilter.length > 0" [nzDropdownMenu]="startDateFilterMenu">
+          <i nz-icon nzType="calendar"></i>
+        </nz-filter-trigger>
+      </th>
+      <th nzColumnKey="EndDate" [nzSortFn]="true" nzCustomFilter>
+        Кінець
+        <nz-filter-trigger [(nzVisible)]="endDateFilterVisible" [nzActive]="endDateFilter && endDateFilter.length > 0" [nzDropdownMenu]="endDateFilterMenu">
+          <i nz-icon nzType="calendar"></i>
+        </nz-filter-trigger>
+      </th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of campaigns.items">
+      <td>{{ data.name }}</td>
+      <td>{{ data.startDate | date:'medium' }}</td>
+      <td>{{ data.endDate | date:'medium' }}</td>
+      <td>
+        <a (click)="editCampaign(data)">
+          <i nz-icon nzType="edit" nzTheme="outline"></i>
+        </a>
+      </td>
+      <td>
+        <a nz-popconfirm nzPopconfirmTitle="Ви впевненні, що хочите видалити цю ярмарку?" (nzOnConfirm)="deleteCampaign(data.id)">
+          <i nz-icon nzType="delete" nzTheme="outline"></i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+
+<nz-dropdown-menu #nameFilterMenu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <input [(ngModel)]="nameFilter" type="text" nz-input placeholder="Назва"/>
+      <button nz-button nzSize="small" nzType="primary" (click)="searchByName()" class="search-button">
+        Пошук
+      </button>
+      <button nz-button nzSize="small" (click)="resetFilterByName()">Очистити</button>
+    </div>
+  </div>
+</nz-dropdown-menu>
+
+<nz-dropdown-menu #startDateFilterMenu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <nz-range-picker style="margin: 5px;" [(ngModel)]="startDateFilter" (ngModelChange)="onChangeStartDateFilter($event)"></nz-range-picker>
+      <br/>
+      <button style="margin-left:5px;" nz-button nzSize="small" nzType="primary" (click)="searchByStartDate()" class="search-button">
+        Пошук
+      </button>
+      <button nz-button nzSize="small" (click)="resetFilterByStartDate()">Очистити</button>
+    </div>
+  </div>
+</nz-dropdown-menu>
+
+<nz-dropdown-menu #endDateFilterMenu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <nz-range-picker style="margin: 5px;" [(ngModel)]="endDateFilter" (ngModelChange)="onChangeEndDateFilter($event)"></nz-range-picker>
+      <br/>
+      <button style="margin-left:5px;" nz-button nzSize="small" nzType="primary" (click)="searchByEndDate()" class="search-button">
+        Пошук
+      </button>
+      <button nz-button nzSize="small" (click)="resetFilterByEndDate()">Очистити</button>
+    </div>
+  </div>
+</nz-dropdown-menu>
+<nz-modal [(nzVisible)]="isCreatingFormVisible" nzTitle="Створити" nzFooter=null (nzOnCancel)="isCreatingFormVisible=!isCreatingFormVisible">
+  <app-create-campaign (createdEvent)="afterCampaignCreating($event)"></app-create-campaign>
+</nz-modal>
+<nz-modal [(nzVisible)]="isEditingFormVisible" nzTitle="Редагування" nzFooter=null (nzOnCancel)="hideEditingForm()">
+  <app-edit-campaign [campaign]="selectedCampaign" (editedEvent)="afterCampaignEditing($event)"></app-edit-campaign>
+</nz-modal>

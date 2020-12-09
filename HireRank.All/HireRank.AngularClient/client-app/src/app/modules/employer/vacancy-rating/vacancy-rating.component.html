@@ -1,0 +1,36 @@
+<nz-select nzShowSearch nzAllowClear nzPlaceHolder="Вибрати вакансію" [(ngModel)]="selectedValue" (ngModelChange)="selectVacancy($event)">
+  <nz-option *ngFor="let i of vacancies.items" [nzValue]="i.id" [nzLabel]="i.title"></nz-option>
+</nz-select>
+
+<nz-table #basicTable [nzData]="studentVacancies">
+  <thead>
+  <tr>
+    <th>Ім'я</th>
+    <th>Друге ім'я</th>
+    <th>Прізвище</th>
+    <th>Дата народження</th>
+    <th>Навчальний заклад</th>
+    <th>Спеціальність</th>
+
+    <th>Ярмарок</th>
+
+    <th>Тестовий бал</th>
+    <th>Пріоритет</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td>{{ data.student.firstName }}</td>
+    <td>{{ data.student.middleName }}</td>
+    <td>{{ data.student.lastName }}</td>
+    <td>{{ getDateOfBirth(data.student.dateOfBirth) }}</td>
+    <td>{{ data.student.universityName }}</td>
+    <td>{{ data.student.major }}</td>
+
+    <td>{{ data.vacancy.campaign.name }}</td>
+
+    <td>{{ data.score }}</td>
+    <td>{{ data.priority }}</td>
+  </tr>
+  </tbody>
+</nz-table>

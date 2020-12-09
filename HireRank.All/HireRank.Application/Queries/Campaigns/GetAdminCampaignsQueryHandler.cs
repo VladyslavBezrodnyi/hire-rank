@@ -1,17 +1,17 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
+using HireRank.Application.Filtering;
 using HireRank.Application.Services.Interfaces;
+using HireRank.Core.Entities;
 using HireRank.Core.Store;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace HireRank.Application.Queries.Campaigns
 {
-    public class GetAdminCampaignsQueryHandler : IRequestHandler<GetAdminCampaignsQuery, List<CampaignViewModel>>
+    public class GetAdminCampaignsQueryHandler : IRequestHandler<GetAdminCampaignsQuery, PagedResult<CampaignViewModel>>
     {
         private readonly IStore _store;
         private readonly IMapper _mapper;
@@ -24,15 +24,14 @@ namespace HireRank.Application.Queries.Campaigns
             _currentUserService = currentUserService;
         }
 
-        public async Task<List<CampaignViewModel>> Handle(GetAdminCampaignsQuery request, CancellationToken cancellationToken)
+        public async Task<PagedResult<CampaignViewModel>> Handle(GetAdminCampaignsQuery request, CancellationToken cancellationToken)
         {
             var adminId = _currentUserService.GetCurrentUserId();
 
             return await _store.Campaigns
                 .AsNoTracking()
                 .Where(x => x.AdminId == adminId)
-                .ProjectTo<CampaignViewModel>(_mapper.ConfigurationProvider)
-                .ToListAsync();
+                .ApplyQueryAsync<Campaign, CampaignViewModel>(request, _mapper.ConfigurationProvider);
                 
         }
     }

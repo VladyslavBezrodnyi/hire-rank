@@ -203,6 +203,12 @@ namespace HireRank.Infrastructure.Migrations
                     b.Property<Guid>("CampaignId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("EmployerId")
                         .HasColumnType("uniqueidentifier");
 

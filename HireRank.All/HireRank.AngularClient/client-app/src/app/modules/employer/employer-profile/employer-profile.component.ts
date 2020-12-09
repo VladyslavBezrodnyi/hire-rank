@@ -28,20 +28,16 @@ export class EmployerProfileComponent implements OnInit {
   }
 
   getEmployer() {
-    // ЗАГЛУШКА
-    this.employer = { companyName: 'NIX Solutions', companyDescription: 'IT компанія', companyAddress: 'Харків',
-      contactPhoneNumber: '+380123456789', siteUrl: 'nix.com' };
-
-    // this.employerService.get()
-    //   .subscribe(data => {
-    //     this.employer = data;
-    //   });
+    this.employerService.get()
+      .subscribe(data => {
+        this.employer = data;
+      });
   }
 
   submitEmployerForm() {
-    // this.employerService.edit(this.employer)
-    //   .subscribe(data => {
-    //     this.employer = data;
-    //   });
+    this.employerService.edit(this.employer)
+      .subscribe(data => {
+        this.employer = data;
+      });
   }
 }

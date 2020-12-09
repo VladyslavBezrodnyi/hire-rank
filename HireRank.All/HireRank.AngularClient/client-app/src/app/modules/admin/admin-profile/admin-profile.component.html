@@ -1,21 +1,28 @@
-<form nz-form [formGroup]="adminForm" (ngSubmit)="submitAdminForm()">
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">Name</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="name is required">
-      <input nz-input id="name" formControlName="name" [(ngModel)]="admin.name"/>
-    </nz-form-control>
-  </nz-form-item>
-
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="contactPhone">Contact phone</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Contact phone is required">
-      <input nz-input id="contactPhone" formControlName="contactPhone" [(ngModel)]="admin.contactPhone"/>
-    </nz-form-control>
-  </nz-form-item>
-
-  <nz-form-item>
-    <nz-form-control [nzSpan]="14" [nzOffset]="6">
-      <button nz-button nzType="primary" [disabled]="adminForm.invalid">Save</button>
-    </nz-form-control>
-  </nz-form-item>
-</form>
+<nz-tabset>
+  <nz-tab nzTitle="Мої дані">
+    <form nz-form [formGroup]="adminForm" (ngSubmit)="submitAdminForm()">
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">Name</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="name is required">
+          <input nz-input id="name" formControlName="name" [(ngModel)]="admin.name"/>
+        </nz-form-control>
+      </nz-form-item>
+    
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="contactPhone">Contact phone</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Contact phone is required">
+          <input nz-input id="contactPhone" formControlName="contactPhone" [(ngModel)]="admin.contactPhone"/>
+        </nz-form-control>
+      </nz-form-item>
+    
+      <nz-form-item>
+        <nz-form-control [nzSpan]="14" [nzOffset]="6">
+          <button nz-button nzType="primary" [disabled]="adminForm.invalid">Save</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </nz-tab>
+  <nz-tab nzTitle="Ярмарки">
+    <app-admin-campaigns></app-admin-campaigns>
+  </nz-tab>
+</nz-tabset>

@@ -1,0 +1,40 @@
+<p>Відкриття вакансії</p>
+<form nz-form [formGroup]="createForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+        <nz-form-label [nzXs]="24" [nzSm]="4">Посада</nz-form-label>
+        <nz-form-control [nzXs]="24" [nzSm]="20" nzErrorTip="Введіть назву посади!">
+            <input class="passenger-input" nz-input formControlName="title" />
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzXs]="24" [nzSm]="4">Опис</nz-form-label>
+        <nz-form-control [nzXs]="24" [nzSm]="20" nzErrorTip="Введіть опис!">
+            <textarea nz-input placeholder="Опис вакансії" [nzAutosize]="{ minRows: 2, maxRows: 12 }"
+                formControlName="description">
+            </textarea>
+        </nz-form-control>
+    </nz-form-item>
+    <h3>Кількість запитань у тесті</h3>
+    <p>Вкажіть кількість запитань, які будуть випадково вибрані з тестовою бази вакансії. Кількість запитань впливає
+        на вагу
+        кожного запитання у тесті (максимальная оцінка за тест - 100 балів).</p>
+    <h4>Вибрана вага правильної відповіді - {{ testQuestionWeight }}</h4>
+    <nz-form-item>
+        <nz-form-control [nzXs]="24" [nzSm]="20" nzErrorTip="Введіть кількість запитань!">
+            <nz-input-number [nzMin]="1" [nzMax]="100" [nzStep]="1" formControlName="testSize"></nz-input-number>
+        </nz-form-control>
+    </nz-form-item>
+    <h3>Ярмарка вакансій</h3>
+    <nz-form-item>
+        <nz-form-control [nzXs]="24" [nzSm]="20" nzErrorTip="Вкажіть ярмарку вакансій!">
+            <nz-radio-group formControlName="campaignId">
+                <label *ngFor="let campaign of activeCampaings" nz-radio nzValue="{{campaign.id}}">{{campaign.name}} </label>
+            </nz-radio-group>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-control>
+            <button nz-button nzType="primary" style="margin-left: auto; margin-right: auto;">Підтвердити</button>
+        </nz-form-control>
+    </nz-form-item>
+</form>
