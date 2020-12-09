@@ -39,6 +39,14 @@ namespace HireRank.Application.Commands.Testing
                 throw new Exception("Vacancy doe not exist.");
             }
 
+            var studentVacancy = await _store.StudentVacancies.FirstOrDefaultAsync(sv => sv.VacancyId == request.VacancyId
+            && sv.StudentId == _currentUserService.GetCurrentUserId());
+
+            if (studentVacancy != null)
+            {
+                throw new Exception("Test has already been passed.");
+            }
+
             var questionIds = request.Answers.Select(ans => ans.Id).ToList();
 
             var questionOptionDict = await _store.Questions
