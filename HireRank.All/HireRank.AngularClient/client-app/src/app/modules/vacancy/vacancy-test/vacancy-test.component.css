@@ -1,0 +1,11 @@
+p {
+  margin: 0;
+}
+button{
+  left: 45%;
+}
+[nz-radio] {
+  display: block;
+  height: 32px;
+  line-height: 32px;
+}

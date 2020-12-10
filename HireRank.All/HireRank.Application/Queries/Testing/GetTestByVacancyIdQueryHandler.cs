@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using HireRank.Application.Services.Interfaces;
 using HireRank.Application.ViewModels;
+using HireRank.Common.Exceptions;
 using HireRank.Core.Store;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -24,17 +25,18 @@ namespace HireRank.Application.Queries.Testing
             _store = store;
             _currentUserService = currentUserService;
             _mapper = mapper;
+            _currentUserService = currentUserService;
         }
 
         public async Task<TestViewModel> Handle(GetTestByVacancyIdQuery request, CancellationToken cancellationToken)
         {
-            var vacansy = await _store.Vacancies.FirstOrDefaultAsync(v => v.Id == request.Id);
-            if (vacansy == null) 
+            var vacancy = await _store.Vacancies.FirstOrDefaultAsync(v => v.Id == request.Id);
+            if (vacancy == null) 
             {
                 throw new System.Exception("Vacansy does not exist.");
             }
 
-            var studentVacancy = await _store.StudentVacancies.FirstOrDefaultAsync(sv => sv.VacancyId == vacansy.Id 
+            var studentVacancy = await _store.StudentVacancies.FirstOrDefaultAsync(sv => sv.VacancyId == vacancy.Id 
             && sv.StudentId == _currentUserService.GetCurrentUserId());
 
             if(studentVacancy != null)
@@ -47,7 +49,17 @@ namespace HireRank.Application.Queries.Testing
                 };
             }
 
-            int testSize = vacansy.TestSize;
+            //var studentId = _currentUserService.GetCurrentUserId();
+            //var studentTries = await _store.StudentVacancies
+            //    .Where(stv => stv.VacancyId == request.Id && stv.StudentId == studentId)
+            //    .ToListAsync();
+            //if (studentTries.Count > 0)
+            //{
+            //    throw new HireRankException("Sorry, you have already passed the test");
+            //}
+
+            int testSize = vacancy.TestSize;
+
             var questions = await _store.VacancyQuestions
                 .Include(vq => vq.Question)
                 .Where(vq => vq.VacancyId == request.Id)

@@ -1,0 +1,23 @@
+<nz-progress [nzPercent]="(ind + 1) / test.questions.length * 100"></nz-progress>
+
+<div class="steps-content">
+  <nz-card style="width:100%; height: 300px" nzTitle="{{ind + 1}}. {{ curQuestion.text }}">
+    <div *ngIf="countCorrectOptions(curQuestion.options) > 1; then checkBoxes else radioButtons"></div>
+    <ng-template #checkBoxes>
+      <div *ngFor="let option of curQuestion.options">
+        <label nz-checkbox style="margin: 2px">{{ option.text }}</label>
+      </div>
+    </ng-template>
+    <ng-template #radioButtons>
+
+      <nz-radio-group  [(ngModel)]="radioValue">
+        <div *ngFor="let option of curQuestion.options; let j = index">
+          <label nz-radio nzValue="{{option.id}}" style="margin: 2px">{{ option.text }}</label>
+        </div>
+      </nz-radio-group>
+
+    </ng-template>
+  </nz-card>
+</div>
+
+<button nz-button nzType="default" (click)="next()" [value]="buttonName">{{buttonName}}</button>
