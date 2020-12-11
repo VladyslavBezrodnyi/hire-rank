@@ -9,11 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HireRank.Core", "HireRank.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HireRank.Infrastructure", "HireRank.Infrastructure\HireRank.Infrastructure.csproj", "{EE122E72-EE8D-4E61-B094-D97259FAFDA2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HireRank.Application", "HireRank.Application\HireRank.Application.csproj", "{EF719B7C-38C9-414A-9113-0AEEC5DF2EBF}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HireRank.AngularClient", "HireRank.AngularClient\HireRank.AngularClient.csproj", "{0CBE45B1-42C4-43FA-97E9-7F6ACA9591F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HireRank.Common", "HireRank.Common\HireRank.Common.csproj", "{07FE786C-F9EC-4C4B-9CA1-173392A0D328}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HireRank.Common", "HireRank.Common\HireRank.Common.csproj", "{07FE786C-F9EC-4C4B-9CA1-173392A0D328}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HireRank.Application", "HireRank.Application\HireRank.Application.csproj", "{A5334D42-6A52-47BA-8098-271C110528CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HireRank.Application.UnitTest", "HireRank.Application.UnitTest\HireRank.Application.UnitTest.csproj", "{D4EA8595-A921-4D7E-889E-ECB5D1C4EC7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +35,6 @@ Global
 		{EE122E72-EE8D-4E61-B094-D97259FAFDA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE122E72-EE8D-4E61-B094-D97259FAFDA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE122E72-EE8D-4E61-B094-D97259FAFDA2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EF719B7C-38C9-414A-9113-0AEEC5DF2EBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EF719B7C-38C9-414A-9113-0AEEC5DF2EBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EF719B7C-38C9-414A-9113-0AEEC5DF2EBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EF719B7C-38C9-414A-9113-0AEEC5DF2EBF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0CBE45B1-42C4-43FA-97E9-7F6ACA9591F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0CBE45B1-42C4-43FA-97E9-7F6ACA9591F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CBE45B1-42C4-43FA-97E9-7F6ACA9591F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +43,14 @@ Global
 		{07FE786C-F9EC-4C4B-9CA1-173392A0D328}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07FE786C-F9EC-4C4B-9CA1-173392A0D328}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07FE786C-F9EC-4C4B-9CA1-173392A0D328}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5334D42-6A52-47BA-8098-271C110528CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5334D42-6A52-47BA-8098-271C110528CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5334D42-6A52-47BA-8098-271C110528CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5334D42-6A52-47BA-8098-271C110528CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4EA8595-A921-4D7E-889E-ECB5D1C4EC7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4EA8595-A921-4D7E-889E-ECB5D1C4EC7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4EA8595-A921-4D7E-889E-ECB5D1C4EC7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4EA8595-A921-4D7E-889E-ECB5D1C4EC7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

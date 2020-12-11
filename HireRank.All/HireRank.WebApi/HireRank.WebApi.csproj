@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HireRank.Application\HireRank.Application.csproj" />
     <ProjectReference Include="..\HireRank.Infrastructure\HireRank.Infrastructure.csproj" />
   </ItemGroup>
 
