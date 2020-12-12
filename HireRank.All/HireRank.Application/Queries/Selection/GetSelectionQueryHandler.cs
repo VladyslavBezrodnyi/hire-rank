@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper.QueryableExtensions;
+using System;
 
 namespace HireRank.Application.Queries.Selection
 {
@@ -24,8 +25,13 @@ namespace HireRank.Application.Queries.Selection
 
         public async Task<List<StudentVacancyViewModel>> Handle(GetSelectionQuery request, CancellationToken cancellationToken)
         {
+            var vacancy = await _store.Vacancies
+                .Include(v => v.Campaign)
+                .FirstOrDefaultAsync(v => v.Id == request.Id);
+
             return await _store.StudentVacancies
-                .Where(s => s.VacancyId == request.Id && s.IsMatch == true)
+                .Where(s => s.VacancyId == request.Id)
+                .Where(s => vacancy.Campaign.EndDate < DateTime.Now ? s.IsMatch == true : true)
                 .ProjectTo<StudentVacancyViewModel>(_mapper.ConfigurationProvider)
                 .ToListAsync();
         }
