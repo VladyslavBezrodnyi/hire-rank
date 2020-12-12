@@ -1,5 +1,5 @@
 <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-  <input type="text" nz-input placeholder="input search text" #search/>
+  <input type="text" nz-input placeholder="Введіть текст для пошуку" #search/>
 </nz-input-group>
 <ng-template #suffixIconButton>
   <button nz-button nzType="primary" nzSearch (click)="searchByTitle(search.value)"><i nz-icon nzType="search"></i></button>

@@ -31,7 +31,7 @@ namespace HireRank.WebApi.Controllers
         public async Task<PagedResult<VacancyViewModel>> GetEmployerVacanciesAsync([FromQuery]GetEmployerVacanciesQuery query)
             => await _mediator.Send(query);
 
-        [Authorize(Roles = "student")]
+        //[Authorize(Roles = "student")]
         [HttpGet("{id}")]
         public async Task<VacancyViewModel> GetVacancyAsync(Guid id)
             => await _mediator.Send(new GetVacancyByIdQuery() { Id = id});

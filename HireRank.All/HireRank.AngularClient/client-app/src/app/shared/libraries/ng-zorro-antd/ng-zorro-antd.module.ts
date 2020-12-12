@@ -21,6 +21,7 @@ import {NzPaginationModule} from 'ng-zorro-antd/pagination';
 import {NzRadioModule} from 'ng-zorro-antd/radio';
 import {NzStepsModule} from 'ng-zorro-antd/steps';
 import {NzProgressModule} from 'ng-zorro-antd/progress';
+import {NzResultModule} from 'ng-zorro-antd/result';
 
 @NgModule({
   declarations: [],
@@ -45,7 +46,8 @@ import {NzProgressModule} from 'ng-zorro-antd/progress';
     NzPaginationModule,
     NzRadioModule,
     NzStepsModule,
-    NzProgressModule
+    NzProgressModule,
+    NzResultModule
   ],
   exports: [
     NzLayoutModule,
@@ -67,7 +69,8 @@ import {NzProgressModule} from 'ng-zorro-antd/progress';
     NzPaginationModule,
     NzRadioModule,
     NzStepsModule,
-    NzProgressModule
+    NzProgressModule,
+    NzResultModule
   ]
 })
 export class NgZorroAntdModule { }

@@ -4,4 +4,4 @@
 <ng-template #extraTemplate>
   <p>{{ vacancy.employer.companyName }}</p>
 </ng-template>
-<button nz-button nzType="primary" (click)="startTesting()">Розпочати тестування</button>
+<button nz-button nzType="primary" (click)="startTesting()" [disabled]="!isAuthorizedStudent || isTestAlreadyPassed">{{startTestingButtonName}}</button>

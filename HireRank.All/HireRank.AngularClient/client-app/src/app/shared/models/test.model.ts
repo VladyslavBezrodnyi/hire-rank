@@ -1,6 +1,7 @@
-import {Question} from './question.model';
+import {TestQuestion} from './test-question.model';
 
 export class Test {
   vacancyId: string;
-  questions: Question[];
+  isPassed: boolean;
+  questions: TestQuestion[];
 }

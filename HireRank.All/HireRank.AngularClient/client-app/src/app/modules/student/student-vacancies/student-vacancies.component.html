@@ -3,23 +3,17 @@
   <nz-table nzBordered [nzData]="result[item]" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ y: '240px' }">
     <thead>
     <tr>
-      <th nzWidth="100px">Title</th>
-      <th nzWidth="100px">Description</th>
-<!--      <th>Campaign name</th>-->
-<!--      <th>Campaign start date</th>-->
-<!--      <th>Campaign end date</th>-->
+      <th nzWidth="20%">Назва</th>
+      <th nzWidth="80%">Опис</th>
     </tr>
     </thead>
     <tbody cdkDropList (cdkDropListDropped)="drop(item, $event)">
     <tr *ngFor="let data of result[item]" cdkDrag>
       <td>{{ data.title }}</td>
       <td>{{ data.description }}</td>
-<!--      <td>{{ data.campaign.name }}</td>-->
-<!--      <td>{{ data.campaign.startDate }}</td>-->
-<!--      <td>{{ data.campaign.endDate }}</td>-->
     </tr>
     </tbody>
   </nz-table>
 </div>
 
-<button nz-button nzType="primary" style="alignment: center" (click)="assignPriority()">Save</button>
+<button nz-button nzType="primary" style="alignment: center" (click)="assignPriority()">Зберегти</button>
