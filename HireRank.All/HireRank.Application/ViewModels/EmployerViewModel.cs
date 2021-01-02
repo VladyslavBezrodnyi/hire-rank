@@ -17,5 +17,7 @@ namespace HireRank.Application.ViewModels
         public string ContactPhoneNumber { get; set; }
 
         public string SiteUrl { get; set; }
+
+        public bool IsConfirmed { get; set; }
     }
 }

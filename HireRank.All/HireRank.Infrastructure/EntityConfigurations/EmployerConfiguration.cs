@@ -23,6 +23,11 @@ namespace HireRank.Infrastructure.EntityConfigurations
             builder
                 .Property(x => x.ContactPhoneNumber)
                 .HasMaxLength(14);
+
+            builder
+                .Property(x => x.IsConfirmed)
+                .IsRequired()
+                .HasDefaultValue<bool>(false);
         }
     }
 }

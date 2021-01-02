@@ -15,6 +15,8 @@ namespace HireRank.Core.Entities
 
         public string SiteUrl { get; set; }
 
+        public bool IsConfirmed { get; set; }
+
         public ICollection<Vacancy> Vacancies { get; set; } = new HashSet<Vacancy>();
 
         public ICollection<Question> Questions { get; set; } = new HashSet<Question>();

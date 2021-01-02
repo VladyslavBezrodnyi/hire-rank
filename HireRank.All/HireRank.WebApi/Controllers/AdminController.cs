@@ -2,46 +2,42 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HireRank.Application.Commands.Admin;
+using HireRank.Application.Queries.Admin;
+using HireRank.Application.ViewModels;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace HireRank.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/admin")]
     [ApiController]
     public class AdminController : ControllerBase
     {
-        // GET: api/<AdminController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IMediator _mediator;
+
+        public AdminController(IMediator mediator)
         {
-            return new string[] { "value1", "value2" };
+            _mediator = mediator;
         }
 
-        // GET api/<AdminController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+        [Authorize(Roles = "admin")]
+        [HttpGet("allEmployer")]
+        public async Task<List<EmployerViewModel>> GetEmployersForConfirmation()
+            => await _mediator.Send(new GetEmployersForConfirmationQuery());
 
-        // POST api/<AdminController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+        [Authorize(Roles = "admin")]
+        [HttpGet("nonConfirmedEmployer")]
+        public async Task<List<EmployerViewModel>> GetNonConfirmedEmployers() 
+            => await _mediator.Send(new GetNonConfirmedEmployersQuery());
 
-        // PUT api/<AdminController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
 
-        // DELETE api/<AdminController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        [Authorize(Roles = "admin")]
+        [HttpPost("confirm")]
+        public async Task<bool> ConfirmEmployer([FromBody] ConfirmEmployerCommand request)
+            => await _mediator.Send(request);
     }
 }
