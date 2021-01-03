@@ -9,6 +9,7 @@ import { GetEmployerVacancies } from "../../shared/models/get-employer-vacancies
 import { GetVacancies } from "../../shared/models/get-vacancies.model";
 import { EmployerVacancy } from "../../shared/models/employer-vacancy.model";
 import { AssignVacancyPriorityModel } from 'src/app/shared/models/assign-vacancy-priority.model';
+import { VacancyAvailableQuestion } from "src/app/shared/models/vacancy-available-question.model";
 
 @Injectable({
     providedIn: 'root'
@@ -97,9 +98,17 @@ export class VacancyService {
 
     assignPriority(assignVacancyPriorityModel: AssignVacancyPriorityModel): Observable<string> {
         return this.http.post<string>(this.controllerUrl + '/assign-priority', assignVacancyPriorityModel);
-      }
+    }
     
-      getAllStudentVacancies(studentId: number): Observable<Vacancy[]> {
+    getAllStudentVacancies(studentId: number): Observable<Vacancy[]> {
         return this.http.get<Vacancy[]>(this.controllerUrl + '/student/' + studentId.toString());
-      }
+    }
+
+    getAvailableVacancyQuestions(vacancyId: string): Observable<VacancyAvailableQuestion[]> {
+        return this.http.get<VacancyAvailableQuestion[]>(this.controllerUrl + '/' + vacancyId + '/available-questions')
+    }
+
+    addTestsToVacancy(vacancyId: string, questionIds: string[]): Observable<string> {
+        return this.http.post<string>(this.controllerUrl + '/' + vacancyId + '/tests', questionIds);
+    }
 }

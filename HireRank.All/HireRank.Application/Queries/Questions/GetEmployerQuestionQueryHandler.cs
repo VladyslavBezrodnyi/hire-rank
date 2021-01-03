@@ -3,9 +3,9 @@ using HireRank.Application.Filtering;
 using HireRank.Application.Services.Interfaces;
 using HireRank.Application.ViewModels;
 using HireRank.Core.Entities;
+using HireRank.Core.Extensions;
 using HireRank.Core.Store;
 using MediatR;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,7 +29,7 @@ namespace HireRank.Application.Queries.Questions
             var employerId = _currentUserService.GetCurrentUserId();
 
             return await _store.Questions
-                .Where(x => x.EmployerId == employerId)
+                .EmployerQuestions(employerId)
                 .ApplyQueryAsync<Question, QuestionViewModel>(request, _mapper.ConfigurationProvider);
         }
     }

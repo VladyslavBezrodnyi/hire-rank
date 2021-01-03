@@ -5,7 +5,6 @@ import { GetEmployerQuestion} from "../../../shared/models/get-employer-question
 import { QuestionService } from "../../../core/services/question.service";
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
-import { elementAt } from 'rxjs/operators';
 
 @Component({
   selector: 'app-test-questions',
@@ -80,7 +79,7 @@ export class TestQuestionsComponent implements OnInit {
     this.questionService.getTags().subscribe(x => {
       x.forEach((element, index) => {
         that.tagOptions.push({ label: element, value: element, checked: false });
-        that.tagColors[element] = that.colorArray[index];
+        that.tagColors[element] = that.colorArray[index % that.colorArray.length];
         
     });
   });}
