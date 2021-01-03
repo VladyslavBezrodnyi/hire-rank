@@ -22,6 +22,8 @@ namespace HireRank.Infrastructure.Mapping
             CreateMap<Campaign, CampaignViewModel>();
             CreateMap<Campaign, ActiveCampiagnViewModel>();
             CreateMap<Question, QuestionViewModel>();
+            CreateMap<Question, AvailableVacancyQuestionViewModel>()
+                 .ForMember(dest => dest.Selected, opt => opt.Ignore());
             CreateMap<Option, OptionViewModel>();
             CreateMap<Student, StudentViewModel>();
             CreateMap<Employer, EmployerViewModel>();
