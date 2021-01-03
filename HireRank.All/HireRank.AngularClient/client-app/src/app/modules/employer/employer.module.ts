@@ -24,6 +24,9 @@ import { CreateVacancyComponent } from './create-vacancy/create-vacancy.componen
 import { EditVacancyComponent } from './edit-vacancy/edit-vacancy.component';
 import { VacancyRatingComponent } from './vacancy-rating/vacancy-rating.component';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { AddTestsForVacancyComponent } from './add-tests-for-vacancy/add-tests-for-vacancy.component';
+import { NzTransferModule } from 'ng-zorro-antd/transfer';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,8 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
     EmployerVacanciesComponent,
     CreateVacancyComponent,
     EditVacancyComponent,
-    VacancyRatingComponent
+    VacancyRatingComponent,
+    AddTestsForVacancyComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +59,9 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
     NzPopconfirmModule,
     NzTagModule,
     NzInputNumberModule,
-    NzRadioModule
+    NzRadioModule,
+    NzTransferModule,
+    NzTypographyModule
   ]
 })
 export class EmployerModule { }
