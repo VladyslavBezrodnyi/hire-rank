@@ -5,7 +5,7 @@
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <IsPackable>false</IsPackable>
-    <SpaRoot>сlient-app\</SpaRoot>
+    <SpaRoot>client-app\</SpaRoot>
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
 
     <!-- Set this to true if you enable server-side prerendering -->
@@ -21,6 +21,18 @@
     <Content Remove="$(SpaRoot)**" />
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="client-app\angular.json" />
+    <None Include="client-app\e2e\tsconfig.json" />
+    <None Include="client-app\package-lock.json" />
+    <None Include="client-app\package.json" />
+    <None Include="client-app\tsconfig.app.json" />
+    <None Include="client-app\tsconfig.base.json" />
+    <None Include="client-app\tsconfig.json" />
+    <None Include="client-app\tsconfig.spec.json" />
+    <None Include="client-app\tslint.json" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

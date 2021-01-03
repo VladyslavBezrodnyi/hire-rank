@@ -1,0 +1,39 @@
+<nz-progress [nzPercent]="(ind + 1) / test.questions.length * 100"></nz-progress>
+
+<div *ngIf="ind >= test.questions.length; then result else questions"></div>
+<ng-template #questions>
+  <div class="steps-content">
+    <nz-card style="width:100%; height: 300px" nzTitle="{{ind + 1}}. {{ curQuestion.text }}">
+      <!--    <div *ngIf="countCorrectOptions(curQuestion.options) > 1; then checkBoxes else radioButtons"></div>-->
+      <!--    <ng-template #checkBoxes>-->
+<!--      <div *ngFor="let option of curQuestion.options">-->
+<!--        <label nz-checkbox style="margin: 2px">{{ option.text }}</label>-->
+<!--      </div>-->
+      <!--    </ng-template>-->
+      <!--    <ng-template #radioButtons>-->
+      <!--      <nz-radio-group  [(ngModel)]="radioValue">-->
+      <!--        <div *ngFor="let option of curQuestion.options; let j = index">-->
+      <!--          <label nz-radio nzValue="{{option.id}}" style="margin: 2px">{{ option.text }}</label>-->
+      <!--        </div>-->
+      <!--      </nz-radio-group>-->
+      <!--    </ng-template>-->
+
+      <nz-checkbox-group style="width: 100%" [(ngModel)]="checkOptions"></nz-checkbox-group>
+
+
+    </nz-card>
+  </div>
+</ng-template>
+
+<ng-template #result>
+  <nz-result
+    nzStatus="success"
+    nzTitle="Ви успішно пройшли тест!"
+    nzSubTitle="Ваш бал: {{score}}">
+    <div nz-result-extra>
+      <button nz-button nzType="primary" (click)="finishTest()">Повернутися на головну сторінку</button>
+    </div>
+  </nz-result>
+</ng-template>
+
+<button nz-button nzType="default" style="left: 45%;" (click)="next()" [value]="buttonName" [hidden]="ind >= test.questions.length">{{buttonName}}</button>

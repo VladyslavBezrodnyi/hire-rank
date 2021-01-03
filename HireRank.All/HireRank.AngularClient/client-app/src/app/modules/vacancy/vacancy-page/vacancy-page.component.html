@@ -1,0 +1,7 @@
+<nz-card style="width:100%;" nzTitle="{{ vacancy.title }}" [nzExtra]="extraTemplate" [nzLoading]="">
+  <p>{{ vacancy.description }}</p>
+</nz-card>
+<ng-template #extraTemplate>
+  <p>{{ vacancy.employer.companyName }}</p>
+</ng-template>
+<button nz-button nzType="primary" (click)="startTesting()" [disabled]="!isAuthorizedStudent || isTestAlreadyPassed">{{startTestingButtonName}}</button>

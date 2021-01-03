@@ -57,7 +57,7 @@ export class VacancyService {
             params = params.set("Title", model.title);
 
             if (model.employerCompany)
-            params = params.set("EmployerCompany", model.employerCompany);    
+            params = params.set("EmployerCompany", model.employerCompany);
 
         if (model.campaignIds && model.campaignIds.length > 0) {
             model.campaignIds.forEach((campaignId) => {
@@ -77,7 +77,7 @@ export class VacancyService {
         if (model.sortingProperty)
             params = params.set("Sorting.SortingProperty", model.sortingProperty?.toString());
 
-        return this.http.get<PagedResult<Vacancy>>(this.controllerUrl + '/employer', { params: params });
+        return this.http.get<PagedResult<Vacancy>>(this.controllerUrl, { params: params });
     }
 
     getActive(): Observable<Campaign[]> {
@@ -110,5 +110,9 @@ export class VacancyService {
 
     addTestsToVacancy(vacancyId: string, questionIds: string[]): Observable<string> {
         return this.http.post<string>(this.controllerUrl + '/' + vacancyId + '/tests', questionIds);
+    }
+
+    getAllStudentVacancies(studentId: number): Observable<Vacancy[]> {
+      return this.http.get<Vacancy[]>(this.controllerUrl + '/student/' + studentId.toString());
     }
 }

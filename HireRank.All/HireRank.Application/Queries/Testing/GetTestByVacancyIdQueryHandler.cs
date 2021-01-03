@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using HireRank.Application.Services.Interfaces;
 using HireRank.Application.ViewModels;
+using HireRank.Common.Exceptions;
 using HireRank.Core.Store;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -16,19 +18,48 @@ namespace HireRank.Application.Queries.Testing
     {
         private readonly IStore _store;
         private readonly IMapper _mapper;
+        private readonly ICurrentUserService _currentUserService;
 
-        public GetTestByVacancyIdQueryHandler(IStore store, IMapper mapper)
+        public GetTestByVacancyIdQueryHandler(IStore store, ICurrentUserService currentUserService, IMapper mapper)
         {
             _store = store;
+            _currentUserService = currentUserService;
             _mapper = mapper;
+            _currentUserService = currentUserService;
         }
 
         public async Task<TestViewModel> Handle(GetTestByVacancyIdQuery request, CancellationToken cancellationToken)
         {
-            var vacansy = await _store.Vacancies.FirstOrDefaultAsync(v => v.Id == request.Id);
-            if (vacansy == null)
+            var vacancy = await _store.Vacancies.FirstOrDefaultAsync(v => v.Id == request.Id);
+            if (vacancy == null) 
+            {
                 throw new System.Exception("Vacansy does not exist.");
-            int testSize = vacansy.TestSize;
+            }
+
+            var studentVacancy = await _store.StudentVacancies.FirstOrDefaultAsync(sv => sv.VacancyId == vacancy.Id 
+            && sv.StudentId == _currentUserService.GetCurrentUserId());
+
+            if(studentVacancy != null)
+            {
+                return new TestViewModel
+                {
+                    VacancyId = request.Id,
+                    IsPassed = true,
+                    Questions = null
+                };
+            }
+
+            //var studentId = _currentUserService.GetCurrentUserId();
+            //var studentTries = await _store.StudentVacancies
+            //    .Where(stv => stv.VacancyId == request.Id && stv.StudentId == studentId)
+            //    .ToListAsync();
+            //if (studentTries.Count > 0)
+            //{
+            //    throw new HireRankException("Sorry, you have already passed the test");
+            //}
+
+            int testSize = vacancy.TestSize;
+
             var questions = await _store.VacancyQuestions
                 .Include(vq => vq.Question)
                 .Where(vq => vq.VacancyId == request.Id)
@@ -53,6 +84,7 @@ namespace HireRank.Application.Queries.Testing
             return new TestViewModel
             {
                 VacancyId = request.Id,
+                IsPassed = false,
                 Questions = testQuestions
             };
         }

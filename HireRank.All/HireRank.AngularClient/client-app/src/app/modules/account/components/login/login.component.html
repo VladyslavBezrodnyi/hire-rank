@@ -1,17 +1,17 @@
 <form nz-form [formGroup]="loginForm" class="login-form" (ngSubmit)="submitForm()">
   <nz-form-item>
-    <nz-form-control nzErrorTip="Please input your email!">
+    <nz-form-control nzErrorTip="Невірна адреса електронної пошти!">
       <nz-input-group>
-        <input type="text" nz-input formControlName="email" placeholder="Email" />
+        <input type="text" nz-input formControlName="email" placeholder="Електронна адреса" />
       </nz-input-group>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-control nzErrorTip="Please input your Password!">
+    <nz-form-control nzErrorTip="Невірний пароль! Пароль має не коротше 6 символів, обов'язково має бути 1 літера в нижньому регістрі та 1 цифра">
       <nz-input-group>
-        <input type="password" nz-input formControlName="password" placeholder="Password" />
+        <input type="password" nz-input formControlName="password" placeholder="Пароль" />
       </nz-input-group>
     </nz-form-control>
   </nz-form-item>
-  <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
+  <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Увійти</button>
 </form>

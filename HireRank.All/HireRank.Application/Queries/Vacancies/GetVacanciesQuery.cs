@@ -37,7 +37,7 @@ namespace HireRank.Application.Queries.Vacancies
                 TryAddPredicate(ref filteringExpression, vacancy => vacancy.Employer.CompanyName.Contains(EmployerCompany));
             }
 
-            if (CampaignIds.Any())
+            if (CampaignIds != null && CampaignIds.Any())
             {
                 TryAddPredicate(ref filteringExpression, vacancy => CampaignIds.Any(x => vacancy.CampaignId == x));
             }

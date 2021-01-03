@@ -4,6 +4,7 @@ import {LoginModel} from '../../../../shared/models/login.model';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {AuthorizationService} from '../../../../core/services/authorization.service';
+import {PasswordRegex} from '../../../../shared/regexes/password-regex';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: [null, [Validators.email, Validators.required]],
-      password: [null, [Validators.required]]
+      password: [null, [Validators.required, Validators.minLength(6), Validators.pattern(PasswordRegex.Regex)]]
     });
   }
 

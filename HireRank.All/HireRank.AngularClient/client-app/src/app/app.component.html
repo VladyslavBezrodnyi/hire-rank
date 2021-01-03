@@ -4,10 +4,12 @@
       <div nz-col style="float: left;">
         <ul nz-menu nzTheme="light" nzMode="horizontal">
           <li nz-menu-item>
-            <a href="#">Home</a>
+            <a href="#">Головна</a>
           </li>
-          <li nz-menu-item>Jobs</li>
-          <li nz-menu-item>Companies</li>
+          <li nz-menu-item>
+            <a routerLink="/vacancy"> Вакансії </a>
+          </li>
+<!--          <li nz-menu-item>Companies</li>-->
         </ul>
       </div>
       <div nz-col style="margin-right: auto; margin-left: auto;"><img src="../assets/short-logo.png" class="logo"></div>
@@ -15,25 +17,25 @@
         <ul nz-menu nzTheme="light" nzMode="horizontal">
           <li nz-menu-item *ngIf="isLogged" [ngSwitch]="this.authorizationService?.currentUser?.role">
             <ng-template ngSwitchCase="admin">
-              <a routerLink="/admin/profile"> Admin profile </a>
+              <a routerLink="/admin/profile">Профіль</a>
             </ng-template>
             <ng-template ngSwitchCase="employer">
-              <a routerLink="/employer/profile"> Employer profile </a>
+              <a routerLink="/employer/profile">Профіль</a>
             </ng-template>
             <ng-template ngSwitchCase="student">
-              <a routerLink="/student/profile"> Student profile </a>
+              <a routerLink="/student/profile">Профіль</a>
             </ng-template>
           </li>
 
           <li nz-menu-item *ngIf="isLogged;else login">
-            <button nz-button [nzType]="'primary'" (click)="logOut()">Logout</button>
+            <button nz-button [nzType]="'primary'" (click)="logOut()">Вийти</button>
           </li>
           <ng-template #login>
             <li nz-menu-item>
-              <button nz-button [nzType]="'primary'" (click)="showLoginForm()">Login</button>
+              <button nz-button [nzType]="'primary'" (click)="showLoginForm()">Увійти</button>
             </li>
             <li nz-menu-item>
-              <button nz-button [nzType]="'primary'" (click)="showRegisterForm()">Register</button>
+              <button nz-button [nzType]="'primary'" (click)="showRegisterForm()">Зареєструватися</button>
             </li>
           </ng-template>
         </ul>
@@ -47,9 +49,9 @@
   </nz-content>
   <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
 </nz-layout>
-<nz-modal [(nzVisible)]="isLoginFormVisible" nzTitle="Login" nzFooter=null (nzOnCancel)="handleCancel('login')">
+<nz-modal [(nzVisible)]="isLoginFormVisible" nzTitle="Вхід" nzFooter=null (nzOnCancel)="handleCancel('login')">
   <app-login (logEvent)="hideLoginForm()"></app-login>
 </nz-modal>
-<nz-modal [(nzVisible)]="isRegisterFormVisible" nzTitle="Registration" nzFooter=null (nzOnCancel)="handleCancel('register')">
+<nz-modal [(nzVisible)]="isRegisterFormVisible" nzTitle="Реєстрація" nzFooter=null (nzOnCancel)="handleCancel('register')">
   <app-registration (registerEvent)="hideRegistrationForm()"></app-registration>
 </nz-modal>

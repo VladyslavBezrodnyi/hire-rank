@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'admin', loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule) },
   { path: 'employer', loadChildren: () => import('./modules/employer/employer.module').then(m => m.EmployerModule) },
   { path: 'student', loadChildren: () => import('./modules/student/student.module').then(m => m.StudentModule) },
+  { path: 'vacancy', loadChildren: () => import('./modules/vacancy/vacancy.module').then(m => m.VacancyModule) },
   { path: '', pathMatch: 'full', redirectTo: '/home' },
 ];
 
