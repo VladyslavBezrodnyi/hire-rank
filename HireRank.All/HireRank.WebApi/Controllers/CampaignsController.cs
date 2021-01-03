@@ -64,5 +64,12 @@ namespace HireRank.WebApi.Controllers
         {
             return await _mediator.Send(new GetActiveCampiagnsQuery());
         }
+
+        //[Authorize(Roles = "admin")]
+        [HttpPost("{id}/close")]
+        public async Task CloseCampaignAsync(Guid id)
+        {
+            await _mediator.Send(new CloseCampaignCommand() { CampaignId = id });
+        }
     }
 }
