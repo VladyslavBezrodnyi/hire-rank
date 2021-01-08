@@ -18,6 +18,7 @@ import { CreateCampaignComponent } from './create-campaign/create-campaign.compo
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { EditCampaignComponent } from './edit-campaign/edit-campaign.component';
+import { EmployerConfirmationComponent } from './employer-confirmation/employer-confirmation.component';
 
 
 const antDesignIcons = AllIcons as {
@@ -26,7 +27,7 @@ const antDesignIcons = AllIcons as {
 const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key])
 
 @NgModule({
-  declarations: [AdminProfileComponent, AdminCampaignsComponent, CreateCampaignComponent, EditCampaignComponent],
+  declarations: [AdminProfileComponent, AdminCampaignsComponent, CreateCampaignComponent, EditCampaignComponent, EmployerConfirmationComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

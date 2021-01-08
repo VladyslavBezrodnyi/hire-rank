@@ -47,7 +47,7 @@
       <router-outlet></router-outlet>
     </div>
   </nz-content>
-  <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
+  <nz-footer>Пятёрга ©{{currentYear}}</nz-footer>
 </nz-layout>
 <nz-modal [(nzVisible)]="isLoginFormVisible" nzTitle="Вхід" nzFooter=null (nzOnCancel)="handleCancel('login')">
   <app-login (logEvent)="hideLoginForm()"></app-login>
