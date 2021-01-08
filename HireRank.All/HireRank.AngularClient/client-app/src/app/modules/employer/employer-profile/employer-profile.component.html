@@ -11,7 +11,7 @@
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="companyDescription">Опис компанії</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Company description is required">
-          <input nz-input id="companyDescription" formControlName="companyDescription" [(ngModel)]="employer.companyDescription"/>
+          <textarea rows="4" nz-input id="companyDescription" formControlName="companyDescription" [(ngModel)]="employer.companyDescription"></textarea>
         </nz-form-control>
       </nz-form-item>
 
@@ -25,7 +25,8 @@
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="contactPhoneNumber">Номер телефону</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Contact phone number is required">
-          <input nz-input id="contactPhoneNumber" formControlName="contactPhoneNumber" [(ngModel)]="employer.contactPhoneNumber"/>
+          <input nz-input id="contactPhoneNumber" formControlName="contactPhoneNumber" [placeholder]="'Введіть номер у форматі 10 цифр'"
+                 [(ngModel)]="employer.contactPhoneNumber"/>
         </nz-form-control>
       </nz-form-item>
 

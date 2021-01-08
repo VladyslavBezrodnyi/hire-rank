@@ -100,7 +100,7 @@ export class VacancyService {
     assignPriority(assignVacancyPriorityModel: AssignVacancyPriorityModel): Observable<string> {
         return this.http.post<string>(this.controllerUrl + '/assign-priority', assignVacancyPriorityModel);
     }
-    
+
     getAllStudentVacancies(studentId: number): Observable<Vacancy[]> {
         return this.http.get<Vacancy[]>(this.controllerUrl + '/student/' + studentId.toString());
     }

@@ -6,6 +6,9 @@ import {RegisterService} from '../../../../core/services/register.service';
 import {LoginModel} from '../../../../shared/models/login.model';
 import {AuthorizationService} from '../../../../core/services/authorization.service';
 import {Router} from '@angular/router';
+import {NameRegex} from '../../../../shared/regexes/name-regex';
+import {PasswordRegex} from '../../../../shared/regexes/password-regex';
+import {PhoneRegex} from '../../../../shared/regexes/phone-regex';
 
 @Component({
   selector: 'app-registration',
@@ -28,19 +31,19 @@ export class RegistrationComponent implements OnInit {
   ngOnInit(): void {
     this.generalForm = this.fb.group({
       email: [null, [Validators.email, Validators.required]],
-      password: [null, [Validators.required]],
+      password: [null, [Validators.required, Validators.pattern(PasswordRegex.Regex)]],
       checkPassword: [null, [Validators.required, this.confirmationValidator]],
       role: [this.studentRoleName, [Validators.required]],
-      firstName: [null, [Validators.required]],
-      middleName: [null, [Validators.required]],
-      lastName: [null, [Validators.required]],
+      firstName: [null, [Validators.required, Validators.pattern(NameRegex.Regex)]],
+      middleName: [null, [Validators.required, Validators.pattern(NameRegex.Regex)]],
+      lastName: [null, [Validators.required, Validators.pattern(NameRegex.Regex)]],
       dateOfBirth: [null, [Validators.required]],
       universityName: [null, [Validators.required]],
       major: [null, [Validators.required]],
       companyName: [null, [Validators.required]],
       companyDescription: [null, [Validators.required]],
       companyAddress: [null, [Validators.required]],
-      contactPhoneNumber: [null, [Validators.required]],
+      contactPhoneNumber: [null, [Validators.required, Validators.pattern(PhoneRegex.Regex)]],
       siteUrl: [null, [Validators.required]],
     });
 
@@ -76,7 +79,7 @@ export class RegistrationComponent implements OnInit {
         major: this.generalForm.value.major
       }
       this.registerStudent(registrationStudentModel);
-    
+
   }
 
   fillEmployerModel(){

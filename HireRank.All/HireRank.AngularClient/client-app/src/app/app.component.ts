@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
 
   hideLoginForm() {
     this.isLoginFormVisible = false;
-    this.isLogged = true;
+    // this.isLogged = true;
   }
 
   hideRegistrationForm() {
