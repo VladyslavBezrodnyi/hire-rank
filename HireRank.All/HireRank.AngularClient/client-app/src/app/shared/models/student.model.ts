@@ -5,4 +5,5 @@ export class Student {
   dateOfBirth: Date;
   universityName: string;
   major: string;
+  email: string;
 }

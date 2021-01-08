@@ -1,0 +1,4 @@
+<nz-select nzShowSearch nzAllowClear nzPlaceHolder="Вибрати вакансію" [(ngModel)]="selectedValue" (ngModelChange)="selectVacancy($event)" style="width: 100%; margin: auto;">
+    <nz-option *ngFor="let i of vacancies.items" [nzValue]="i.id" [nzLabel]="i.title"></nz-option>
+  </nz-select>
+  <app-vacancy-rating-overview vacancyId="{{selectedValue}}"></app-vacancy-rating-overview>

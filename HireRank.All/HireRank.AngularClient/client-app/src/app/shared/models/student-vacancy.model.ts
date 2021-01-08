@@ -9,4 +9,6 @@ export class StudentVacancy {
   priority: number;
   isClosed: boolean;
   isMatch: boolean;
+  expand: boolean;
+  order: number;
 }

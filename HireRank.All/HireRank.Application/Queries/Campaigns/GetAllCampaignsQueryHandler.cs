@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using HireRank.Core.Extensions;
+using HireRank.Core.StablePairing;
 using HireRank.Core.Store;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -15,21 +15,30 @@ namespace HireRank.Application.Queries.Campaigns
     {
         private readonly IStore _store;
         private readonly IMapper _mapper;
+        private readonly ICampaignProcessingState _campaignProcessingState;
 
-        public GetAllCampaignsQueryHandler(IStore store, IMapper mapper)
+        public GetAllCampaignsQueryHandler(IStore store, IMapper mapper, ICampaignProcessingState campaignProcessingState)
         {
             _store = store;
             _mapper = mapper;
+            _campaignProcessingState = campaignProcessingState;
         }
 
         public async Task<List<CampaignViewModel>> Handle(GetAllCampaignsQuery request, CancellationToken cancellationToken)
         {
-            return await _store.Campaigns
+            var campaigns =  await _store.Campaigns
                 .AsNoTracking()
                 .OrderByDescending(x => x.StartDate)
                 //.ApplyPaging(request.PageSize, request.Page)
                 .ProjectTo<CampaignViewModel>(_mapper.ConfigurationProvider)
                 .ToListAsync();
+
+            foreach(var campaign in campaigns)
+            {
+                campaign.State = await _campaignProcessingState.CheckStateOfProcessingAsync(campaign.Id);
+            }
+
+            return campaigns;
         }
     }
 }

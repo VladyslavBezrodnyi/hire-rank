@@ -5,6 +5,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { PagedResult } from "../../shared/models/paged-result.model";
 import { GetAdminCampaign } from "../../shared/models/get-admin-campaigns.model";
+import { CampaignProcessingStates } from "src/app/shared/models/campaign-state.model";
 
 @Injectable({
     providedIn: 'root'
@@ -71,7 +72,15 @@ import { GetAdminCampaign } from "../../shared/models/get-admin-campaigns.model"
       return this.http.delete<string>(this.controllerUrl + "/" + id);
     }
 
+    close(id: string): Observable<string> {
+      return this.http.post<string>(this.controllerUrl + "/" + id + "/close", {});
+    }
+
     getShortDate(date: Date): string {
       return date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
+    }
+
+    getState(id: string) : Observable<CampaignProcessingStates> {
+      return this.http.get<CampaignProcessingStates>(this.controllerUrl + "/" + id + "/state");
     }
   }

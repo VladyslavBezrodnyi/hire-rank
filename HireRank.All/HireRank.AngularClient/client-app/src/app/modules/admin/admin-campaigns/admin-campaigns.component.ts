@@ -5,6 +5,8 @@ import { Campaign } from "../../../shared/models/campaign.model";
 import { GetAdminCampaign } from "../../../shared/models/get-admin-campaigns.model";
 import { CampaignService } from "../../../core/services/campaign.service";
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { CampaignProcessingStates } from 'src/app/shared/models/campaign-state.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-campaigns',
@@ -32,7 +34,7 @@ export class AdminCampaignsComponent implements OnInit {
   isCreatingFormVisible: boolean = false;
   isEditingFormVisible: boolean = false;
 
-  constructor(private campaignService: CampaignService, private messageService: NzMessageService) { }
+  constructor(private campaignService: CampaignService, private router: Router, private messageService: NzMessageService) { }
 
   ngOnInit(): void {
     this.queryFilter.pageSize = 2;
@@ -162,5 +164,18 @@ export class AdminCampaignsComponent implements OnInit {
   editCampaign(campaign: Campaign){
     this.selectedCampaign = campaign;
     this.isEditingFormVisible = true;
+  }
+
+  closeCampaign(id: string) {
+    this.campaigns.items.forEach(item => {
+      if (item.id == id) {
+        item.state = CampaignProcessingStates.Started;
+      }
+    });
+    this.campaignService.close(id).subscribe();
+  }
+
+  viewVacancies(id: string) {
+    this.router.navigate(['/admin/campaign', id]);
   }
 }

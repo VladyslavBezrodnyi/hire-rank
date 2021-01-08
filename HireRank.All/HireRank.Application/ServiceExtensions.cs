@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HireRank.Application.Services.Interfaces;
+using HireRank.Core.StablePairing;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;

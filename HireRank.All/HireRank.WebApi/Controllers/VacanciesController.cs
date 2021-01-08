@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using HireRank.Application.Commands.Vacancies;
 using HireRank.Application.Filtering;
+using HireRank.Application.Queries.Selection;
 using HireRank.Application.Queries.Vacancies;
 using HireRank.Application.ViewModels;
 using HireRank.Application.ViewModels.Shared;
@@ -71,5 +72,12 @@ namespace HireRank.WebApi.Controllers
         [HttpGet("{id}/available-questions")]
         public async Task<List<AvailableVacancyQuestionViewModel>> GetAvailableVacancyQuestionsAsync(Guid id)
             => await _mediator.Send(new GetAvailableQuestionsQuery(id));
+
+        [HttpGet("{id}/vacancy-rating")]
+        public async Task<List<StudentVacancyViewModel>> GetVacancyStudentsAsync(Guid id)
+        {
+            GetSelectionQuery request = new GetSelectionQuery(id);
+            return await _mediator.Send(request);
+        }
     }
 }

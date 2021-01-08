@@ -1,7 +1,21 @@
-<nz-card style="width:100%;" nzTitle="{{ vacancy.title }}" [nzExtra]="extraTemplate" [nzLoading]="">
-  <p>{{ vacancy.description }}</p>
-</nz-card>
-<ng-template #extraTemplate>
-  <p>{{ vacancy.employer.companyName }}</p>
-</ng-template>
-<button nz-button nzType="primary" (click)="startTesting()" [disabled]="!isAuthorizedStudent || isTestAlreadyPassed">{{startTestingButtonName}}</button>
+<nz-tabset>
+  <nz-tab nzTitle="Опис вакансії">
+    <nz-card style="width:100%;" nzTitle="{{ vacancy.title }}" [nzExtra]="extraTemplate" [nzLoading]="">
+      <h2>Опис вакансії:</h2>
+      <p>{{ vacancy.description }}</p>
+    </nz-card>
+    <ng-template #extraTemplate>
+      <h3 style="font-weight: 600;">{{ vacancy.employer.companyName }}</h3>
+      <h4>Контактні дані:</h4>
+      <p>Адреса - {{ vacancy.employer.companyAddress }}</p>
+      <p>Телефон - {{ vacancy.employer.contactPhoneNumber }}</p>
+      <p>Сайт - <a href="{{ vacancy.employer.siteUrl }}">{{ vacancy.employer.siteUrl }}</a> </p>
+    </ng-template>
+    <div style="width: 100%; align-items: center; text-align: center;">
+      <button nz-button nzType="primary" (click)="startTesting()" [disabled]="!isAuthorizedStudent || isTestAlreadyPassed">{{startTestingButtonName}}</button>
+    </div>
+  </nz-tab>
+  <nz-tab nzTitle="Рейтинг">
+    <app-vacancy-rating-overview vacancyId="{{id}}"></app-vacancy-rating-overview>
+  </nz-tab>
+</nz-tabset>

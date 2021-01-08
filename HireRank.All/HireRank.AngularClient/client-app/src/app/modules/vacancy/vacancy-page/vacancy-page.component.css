@@ -2,7 +2,12 @@ p {
   margin: 0;
 }
 [nz-button] {
-  margin-right: 8px;
-  margin-bottom: 12px;
-  left:45%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.ant-card-head-title {
+  font-size: xx-large;
 }

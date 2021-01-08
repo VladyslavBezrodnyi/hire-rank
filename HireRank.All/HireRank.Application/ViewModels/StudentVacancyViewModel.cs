@@ -18,5 +18,7 @@ namespace HireRank.Application.ViewModels
         public bool IsClosed { get; set; }
 
         public bool IsMatch { get; set; }
+
+        public int Order { get; set; }
     }
 }

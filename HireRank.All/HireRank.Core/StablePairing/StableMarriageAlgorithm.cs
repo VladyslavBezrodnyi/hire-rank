@@ -4,21 +4,26 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace HireRank.Core.StablePairing
 {
-    public class StableMarriageAlgorith
+    public class StableMarriageAlgorithm : ICampaignProcessingAlgorithm
     {
         private readonly IStore _store;
+        private readonly ICampaignProcessingState _processingState;
 
-        public StableMarriageAlgorith(IStore store)
+        public StableMarriageAlgorithm(IStore store, ICampaignProcessingState processingState)
         {
             _store = store;
+            _processingState = processingState;
         }
 
         public async Task FindAndSaveAllPairsForCampaignAsync(Guid campaignId)
         {
+            _processingState.SetProcessingState(campaignId, CampaignProcessingStates.Started);
+
             var studentVacancies =  await 
                 _store.StudentVacancies
                 .Where(x => x.Vacancy.CampaignId == campaignId)
@@ -81,6 +86,8 @@ namespace HireRank.Core.StablePairing
             }
 
             await _store.SaveChangesAsync();
+
+            _processingState.SetProcessingState(campaignId, CampaignProcessingStates.Finished);
         }
 
         private Guid? GetFreeVacancy(Dictionary<Guid, bool> vacancyAvailables)

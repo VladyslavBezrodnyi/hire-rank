@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HireRank.Core.StablePairing;
+using System;
 
 namespace HireRank.Application.Queries.Campaigns
 {
@@ -11,5 +12,7 @@ namespace HireRank.Application.Queries.Campaigns
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
+
+        public CampaignProcessingStates State { get; set; }
     }
 }

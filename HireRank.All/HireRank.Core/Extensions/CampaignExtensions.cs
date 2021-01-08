@@ -1,6 +1,9 @@
 ﻿using HireRank.Core.Entities;
+using HireRank.Core.StablePairing;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace HireRank.Core.Extensions
 {

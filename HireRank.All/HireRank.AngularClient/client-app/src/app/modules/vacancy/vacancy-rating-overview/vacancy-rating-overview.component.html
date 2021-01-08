@@ -1,0 +1,52 @@
+<h1 style="margin: 40px; margin-bottom: 5px;">{{ vacancy?.title }}
+<nz-tag *ngIf="campaignStatus == 2" nzColor="success">
+    <i nz-icon nzType="check-circle"></i>
+    <span style="font-size: 15px;">Завершена</span>
+</nz-tag>
+
+<nz-tag *ngIf="campaignStatus == 1" nzColor="processing">
+    <i nz-icon nzType="sync" nzSpin></i>
+    <span style="font-size: 15px;">Обробляється</span>
+</nz-tag>
+
+<nz-tag *ngIf="campaignStatus == 0" nzColor="default">
+    <i nz-icon nzType="clock-circle" nzTheme="outline"></i>
+    <span style="font-size: 15px;">Не оброблена</span>
+</nz-tag>
+</h1> 
+
+<h4 style="margin-left: 40px; margin-top: 5px;">{{ vacancy?.employer.companyName }} </h4>
+
+<nz-spin [nzSpinning]="loading"></nz-spin>
+
+<nz-table [nzData]="vacancyRatings" #expandTable>
+    <thead>
+        <tr>
+            <th nzWidth="40px" ></th>
+            <th nzWidth="40px" ></th>
+            <th >Студент</th>
+            <th>Навчальний заклад</th>
+            <th>Пошта</th>
+            <th>Рейтинг</th>
+            <th>Приорітет</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let data of vacancyRatings">
+            <tr [class.match]="data.isMatch">
+                <td>{{ data.order }}</td>
+                <td [nzExpand]="data.expand"></td>
+                <td >{{ data.student.lastName }} {{ data.student.firstName }} {{
+                    data.student.middleName }}</td>
+                <td>{{ data.student.universityName }}</td>
+                <td>{{ data.student.email }}</td>
+                <td>{{ data.score }}</td>
+                <td>{{ data.priority }}</td>
+            </tr>
+            <tr [(nzExpand)]="data.expand">
+                <span> Пошта - {{ data.student.email }}, Навчальний напрям - {{ data.student.universityName }} {{
+                    data.student.major }}</span>
+            </tr>
+        </ng-container>
+    </tbody>
+</nz-table>

@@ -1,7 +1,9 @@
 ﻿using HireRank.Common.Configurations;
 using HireRank.Core.Entities;
+using HireRank.Core.StablePairing;
 using HireRank.Core.Store;
 using HireRank.Infrastructure.Context;
+using HireRank.Infrastructure.StateProcessing;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -18,6 +20,15 @@ namespace HireRank.Infrastructure
     {
         public static IServiceCollection AddPersistence(this IServiceCollection services, string connectionString, string migrationsAssembly = "")
         {
+            var dbOptionsBuilder = new DbContextOptionsBuilder<HireRankContext>();
+            dbOptionsBuilder.UseSqlServer(connectionString, sql =>
+            {
+                if (!string.IsNullOrEmpty(migrationsAssembly))
+                {
+                    sql.MigrationsAssembly(migrationsAssembly);
+                }
+            });
+
             services.AddDbContext<HireRankContext>(options => options.UseSqlServer(connectionString, sql =>
             {
                 if (!string.IsNullOrEmpty(migrationsAssembly))
@@ -28,7 +39,9 @@ namespace HireRank.Infrastructure
 
             services.AddScoped<IStore, EntityFrameworkStore>();
 
-            return services;
+            return services
+                .AddSingleton<ICampaignProcessingState>(new CampaignProcessingState(dbOptionsBuilder.Options))
+                .AddScoped<ICampaignProcessingAlgorithm, StableMarriageAlgorithm>();
         }
 
         public static IServiceCollection AddIdentity(this IServiceCollection services, IConfiguration configuration)
