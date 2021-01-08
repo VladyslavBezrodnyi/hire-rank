@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Employer} from '../../../shared/models/employer.model';
 import {EmployerService} from '../../../core/services/employer.service';
+import {PhoneRegex} from '../../../shared/regexes/phone-regex';
 
 @Component({
   selector: 'app-employer-profile',
@@ -22,7 +23,7 @@ export class EmployerProfileComponent implements OnInit {
       companyName: [null, [Validators.required]],
       companyDescription: [null, [Validators.required]],
       companyAddress: [null, [Validators.required]],
-      contactPhoneNumber : [null, [Validators.required]],
+      contactPhoneNumber : [null, [Validators.required, Validators.pattern(PhoneRegex.Regex)]],
       siteUrl : [null, [Validators.required]],
     });
   }

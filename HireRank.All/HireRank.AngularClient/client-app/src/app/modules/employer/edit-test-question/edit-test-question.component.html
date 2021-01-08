@@ -7,11 +7,7 @@
           [nzSm]="20"
           nzErrorTip="Введіть запитання!"
         >
-          <input
-            class="passenger-input"
-            nz-input
-            formControlName="text"
-          />
+          <textarea rows="1" nz-input class="passenger-input" formControlName="text"></textarea>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
@@ -46,7 +42,7 @@
         />
         <label [ngModelOptions]="{standalone: true}" nz-checkbox style="margin-right: 5px;" [(ngModel)]="control.isCorrect" (ngModelChange)="checkOptions($event)">Правильна</label>
         <i nz-icon nzType="minus-circle-o" class="dynamic-delete-button" (click)="removeField(control, $event)"></i>
-        
+
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -59,7 +55,7 @@
     </nz-form-item>
     <nz-form-item>
       <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 20, offset: 4 }">
-        <button nz-button nzType="primary">Зберегти</button>
+        <button nz-button nzType="primary" [disabled]="validateForm.invalid">Зберегти</button>
       </nz-form-control>
     </nz-form-item>
   </form>

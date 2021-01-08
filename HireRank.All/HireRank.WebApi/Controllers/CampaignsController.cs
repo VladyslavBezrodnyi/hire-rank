@@ -2,6 +2,7 @@
 using HireRank.Application.Filtering;
 using HireRank.Application.Queries.Campaigns;
 using HireRank.Application.ViewModels;
+using HireRank.Core.StablePairing;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,10 +16,12 @@ namespace HireRank.WebApi.Controllers
     public class CampaignsController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly ICampaignProcessingState _campaignProcessingState;
 
-        public CampaignsController(IMediator mediator)
+        public CampaignsController(IMediator mediator, ICampaignProcessingState campaignProcessingState)
         {
             _mediator = mediator;
+            _campaignProcessingState = campaignProcessingState;
         }
 
         [Authorize(Roles = "admin")]
@@ -64,5 +67,16 @@ namespace HireRank.WebApi.Controllers
         {
             return await _mediator.Send(new GetActiveCampiagnsQuery());
         }
+
+        //[Authorize(Roles = "admin")]
+        [HttpPost("{id}/close")]
+        public async Task CloseCampaignAsync(Guid id)
+        {
+            await _mediator.Send(new CloseCampaignCommand() { CampaignId = id });
+        }
+
+        [HttpGet("{id}/state")]
+        public async Task<CampaignProcessingStates> CheckStateOfCampaignProcessing(Guid id)
+            => await _campaignProcessingState.CheckStateOfProcessingAsync(id);
     }
 }

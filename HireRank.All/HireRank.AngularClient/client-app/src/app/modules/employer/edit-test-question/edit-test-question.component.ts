@@ -31,7 +31,7 @@ export class EditTestQuestionComponent implements OnInit {
     if (this.question) {
       this.loadTagOptions();
       this.validateForm = this.fb.group({
-        text: [this.question.text, [Validators.required]],
+        text: [this.question.text, [Validators.required, Validators.minLength(1)]],
         tag: [this.question.questionTag, [Validators.required]]
       });
       this.listOfControl = [];
@@ -95,14 +95,6 @@ export class EditTestQuestionComponent implements OnInit {
       error => {
         this.editedEvent.next(false);
       });
-    this.loadTagOptions();
-    this.listOfControl = [];
-    this.validateForm = this.fb.group({
-      text: [null, [Validators.required]],
-      tag: [null, [Validators.required]]
-
-    });
-    this.addField();
   }
 
   ngOnInit(): void {

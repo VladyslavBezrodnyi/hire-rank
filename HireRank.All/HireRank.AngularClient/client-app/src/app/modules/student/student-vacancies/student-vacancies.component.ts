@@ -16,6 +16,7 @@ export class StudentVacanciesComponent implements OnInit {
   result: { [campaignName: string]: Vacancy[]; } = { };
   campaigns: string[] = [];
   dirtyCampaigns = new Set();
+  areAnyVacancies = true;
 
   constructor(private vacancyService: VacancyService, private authorizationService: AuthorizationService) { }
 
@@ -32,6 +33,11 @@ export class StudentVacanciesComponent implements OnInit {
     this.vacancyService.getAllStudentVacancies(this.authorizationService?.currentUser?.id)
       .subscribe(data => {
         this.vacancies = data;
+
+        if (this.vacancies == null || this.vacancies.length < 1) {
+          this.areAnyVacancies = false;
+          return;
+        }
 
         this.result = this.vacancies.reduce((r, a) => {
           r[a.campaign.name] = r[a.campaign.name] || [];

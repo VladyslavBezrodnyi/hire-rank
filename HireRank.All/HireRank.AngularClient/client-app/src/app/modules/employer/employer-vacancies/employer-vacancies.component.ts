@@ -8,6 +8,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { CreateVacancyComponent } from '../create-vacancy/create-vacancy.component';
 import { CampaignService } from 'src/app/core/services/campaign.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employer-vacancies',
@@ -34,7 +35,11 @@ export class EmployerVacanciesComponent implements OnInit {
   isEditingFormVisible: boolean = false;
   campaignIdOptions: Array<{ label: string; value: string,  checked: boolean }> = [];
 
-  constructor(private vacancyService: VacancyService,private campaignService: CampaignService, private messageService: NzMessageService) { }
+  constructor(
+    private vacancyService: VacancyService,
+    private campaignService: CampaignService,
+    private messageService: NzMessageService,
+    private router: Router) { }
 
 
   ngOnInit(): void {
@@ -77,6 +82,10 @@ export class EmployerVacanciesComponent implements OnInit {
 
   hideEditingForm() {
     this.isEditingFormVisible = false;
+  }
+
+  goToTestEditing(id: string) {
+    this.router.navigateByUrl(`employer/vacancy/${id}/tests`);
   }
 
   getCampaignFilters() {

@@ -19,16 +19,20 @@ namespace HireRank.Infrastructure.Mapping
 
         private void MapQueris()
         {
-            CreateMap<Campaign, CampaignViewModel>();
+            CreateMap<Campaign, CampaignViewModel>()
+                 .ForMember(dest => dest.State, opt => opt.Ignore());
             CreateMap<Campaign, ActiveCampiagnViewModel>();
             CreateMap<Question, QuestionViewModel>();
+            CreateMap<Question, AvailableVacancyQuestionViewModel>()
+                 .ForMember(dest => dest.Selected, opt => opt.Ignore());
             CreateMap<Option, OptionViewModel>();
             CreateMap<Student, StudentViewModel>();
             CreateMap<Employer, EmployerViewModel>();
             CreateMap<Vacancy, VacancyViewModel>();
             CreateMap<Question, TestQuestionViewModel>();
             CreateMap<Option, TestOptionViewModel>();
-            CreateMap<StudentVacancy, StudentVacancyViewModel>();
+            CreateMap<StudentVacancy, StudentVacancyViewModel>()
+                .ForMember(dest => dest.Order, opt => opt.Ignore());
         }
 
         private void MapCommands()

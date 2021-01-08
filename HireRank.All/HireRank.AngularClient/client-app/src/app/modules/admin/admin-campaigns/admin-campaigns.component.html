@@ -29,6 +29,9 @@
           <i nz-icon nzType="calendar"></i>
         </nz-filter-trigger>
       </th>
+      <th>Стан</th>
+      <th></th>
+      <th></th>
       <th></th>
       <th></th>
     </tr>
@@ -39,6 +42,11 @@
       <td>{{ data.startDate | date:'medium' }}</td>
       <td>{{ data.endDate | date:'medium' }}</td>
       <td>
+        <nz-tag *ngIf="data.state == 0" [nzColor]="'#A6A6A6'">Не оброблена</nz-tag>
+        <nz-tag *ngIf="data.state == 1" [nzColor]="'#EC9E06'">Обробляється</nz-tag>
+        <nz-tag *ngIf="data.state == 2" [nzColor]="'#56C717'">Завершена</nz-tag>
+      </td>
+      <td>
         <a (click)="editCampaign(data)">
           <i nz-icon nzType="edit" nzTheme="outline"></i>
         </a>
@@ -47,6 +55,12 @@
         <a nz-popconfirm nzPopconfirmTitle="Ви впевненні, що хочите видалити цю ярмарку?" (nzOnConfirm)="deleteCampaign(data.id)">
           <i nz-icon nzType="delete" nzTheme="outline"></i>
         </a>
+      </td>
+      <td>
+        <button *ngIf="data.state == 0" (click)="closeCampaign(data.id)" nz-button nzType="primary" [nzSize]="size" nzShape="round"><i nz-icon nzType="issues-close" nzTheme="outline"></i>Закрити</button>
+      </td>
+      <td>
+        <button (click)="viewVacancies(data.id)" nz-button nzType="success" [nzSize]="size" nzShape="round"><i nz-icon nzType="trophy" nzTheme="outline"></i>Вакансії</button>
       </td>
     </tr>
   </tbody>

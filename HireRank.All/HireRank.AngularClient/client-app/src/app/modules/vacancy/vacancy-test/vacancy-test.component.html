@@ -1,4 +1,4 @@
-<nz-progress [nzPercent]="(ind + 1) / test.questions.length * 100"></nz-progress>
+<nz-progress [nzPercent]="ind / test.questions.length * 100"></nz-progress>
 
 <div *ngIf="ind >= test.questions.length; then result else questions"></div>
 <ng-template #questions>

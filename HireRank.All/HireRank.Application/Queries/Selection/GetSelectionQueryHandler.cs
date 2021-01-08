@@ -25,15 +25,17 @@ namespace HireRank.Application.Queries.Selection
 
         public async Task<List<StudentVacancyViewModel>> Handle(GetSelectionQuery request, CancellationToken cancellationToken)
         {
-            var vacancy = await _store.Vacancies
-                .Include(v => v.Campaign)
-                .FirstOrDefaultAsync(v => v.Id == request.Id);
-
-            return await _store.StudentVacancies
+            var ratings =  await _store.StudentVacancies
                 .Where(s => s.VacancyId == request.Id)
-                .Where(s => vacancy.Campaign.EndDate < DateTime.Now ? s.IsMatch == true : true)
+                .OrderByDescending(s => s.Score)
                 .ProjectTo<StudentVacancyViewModel>(_mapper.ConfigurationProvider)
                 .ToListAsync();
+
+            return ratings.Select((rating, index) =>
+            {
+                rating.Order = index + 1;
+                return rating;
+            }).ToList();
         }
     }
 }

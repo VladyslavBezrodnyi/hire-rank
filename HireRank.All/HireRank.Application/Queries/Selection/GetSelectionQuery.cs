@@ -1,11 +1,7 @@
-﻿using AutoMapper;
-using HireRank.Application.ViewModels;
-using HireRank.Core.Store;
+﻿using HireRank.Application.ViewModels;
 using MediatR;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HireRank.Application.Queries.Selection
 {

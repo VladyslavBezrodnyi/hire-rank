@@ -13,5 +13,5 @@
       </nz-input-group>
     </nz-form-control>
   </nz-form-item>
-  <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Увійти</button>
+  <button nz-button class="login-form-button login-form-margin" [disabled]="loginForm.dirty && loginForm.invalid" [nzType]="'primary'">Увійти</button>
 </form>

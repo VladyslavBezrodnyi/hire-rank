@@ -5,7 +5,6 @@ using HireRank.Core.Extensions;
 using HireRank.Core.Store;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;

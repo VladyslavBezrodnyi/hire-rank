@@ -1,0 +1,33 @@
+<h1 nz-typography>{{ vacancy?.title }}</h1>
+<h4 nz-typography>Розмір тесту: {{ vacancy?.testSize }}</h4>
+
+<div class="send-request">
+  <button nz-button nzType="primary" [disabled]="setOfCheckedId.size === 0" [nzLoading]="loading" (click)="sendRequest()">
+    Зберегти
+  </button>
+  <span>Обрано {{ setOfCheckedId.size }} питань</span>
+</div>
+<nz-table
+  #rowSelectionTable
+  nzShowPagination
+  nzShowSizeChanger
+  [nzData]="questions"
+  (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
+  <thead>
+    <tr>
+      <th [nzChecked]="checked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="onAllChecked($event)"></th>
+      <th>Питання</th>
+      <th>Тег</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of questions">
+      <td
+        [nzChecked]="setOfCheckedId.has(data.id)"
+        (nzCheckedChange)="onItemChecked(data.id, $event)"
+      ></td>
+      <td>{{ data.text }}</td>
+      <td> <nz-tag nzColor="{{tagColors[data.questionTag]}}">{{ data.questionTag }}</nz-tag></td>
+    </tr>
+  </tbody>
+</nz-table>
