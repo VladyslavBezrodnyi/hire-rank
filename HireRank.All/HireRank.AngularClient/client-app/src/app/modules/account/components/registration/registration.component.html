@@ -1,19 +1,19 @@
 <form nz-form [formGroup]="generalForm" class="login-form" (ngSubmit)="submitForm()">
   <nz-form-item>
-    <nz-form-control nzErrorTip="Please input your Email!">
-      <input type="text" nz-input formControlName="email" placeholder="Email" />
+    <nz-form-control nzErrorTip="Невірна адреса електронної пошти!">
+      <input type="text" nz-input formControlName="email" placeholder="Електронна пошта" />
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-control nzErrorTip="Please input your Password!">
-      <input type="password" nz-input formControlName="password" placeholder="Password" />
+    <nz-form-control nzErrorTip="Невірний пароль!">
+      <input type="password" nz-input formControlName="password" placeholder="Пароль" />
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
     <nz-form-control [nzErrorTip]="errorTpl">
-      <input nz-input type="password" formControlName="checkPassword" id="checkPassword" placeholder="Confirm Password"/>
+      <input nz-input type="password" formControlName="checkPassword" id="checkPassword" placeholder="Підтвердіть пароль"/>
       <ng-template #errorTpl let-control>
         <ng-container *ngIf="control.hasError('required')">
           Please confirm your password!
@@ -26,11 +26,11 @@
   </nz-form-item>
 
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="chooseRole" nzRequired>Who are you?</nz-form-label>
+      <nz-form-label [nzSm]="7" [nzXs]="24" nzFor="chooseRole" nzRequired>Познайомимося</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
         <nz-radio-group id="chooseRole" nzButtonStyle="solid" formControlName="role"> <!-- [(ngModel)]="radioValue" [ngModelOptions]="{standalone: true}"> -->
-          <label nz-radio-button nzValue="Student">Student</label>
-          <label nz-radio-button nzValue="Employer">Employer</label>
+          <label nz-radio-button nzValue="Student">Я кандидат</label>
+          <label nz-radio-button nzValue="Employer">Я роботодавець</label>
         </nz-radio-group>
       </nz-form-control>
     </nz-form-item>
@@ -38,71 +38,71 @@
   <!-- STUDENT PART -->
 
   <nz-form-item [hidden]="radioValue != studentRoleName">
-    <nz-form-control nzErrorTip="First name is required">
-      <input nz-input id="firstName" formControlName="firstName" placeholder="First name"/>
+    <nz-form-control nzErrorTip="Невірне ім'я!">
+      <input nz-input id="firstName" formControlName="firstName" placeholder="Ім'я"/>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item [hidden]="radioValue != studentRoleName">
-    <nz-form-control nzErrorTip="Middle name is required">
-      <input nz-input id="middleName" formControlName="middleName" placeholder="Middle name"/>
+    <nz-form-control nzErrorTip="Невірне друге ім'я!">
+      <input nz-input id="middleName" formControlName="middleName" placeholder="Друге ім'я"/>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item [hidden]="radioValue != studentRoleName">
-    <nz-form-control nzErrorTip="Last name is required">
-      <input nz-input id="lastName" formControlName="lastName" placeholder="Last name"/>
+    <nz-form-control nzErrorTip="Невірне прізвище">
+      <input nz-input id="lastName" formControlName="lastName" placeholder="Прізвище"/>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item [hidden]="radioValue != studentRoleName">
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="dateOfBirth">Date of birth</nz-form-label>
-    <nz-form-control nzErrorTip="Date of birth is required">
-      <nz-date-picker id="dateOfBirth" formControlName="dateOfBirth" placeholder="Date of birth"></nz-date-picker>
+<!--    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="dateOfBirth">Дата народження</nz-form-label>-->
+    <nz-form-control nzErrorTip="Дата народження обов'язкова">
+      <nz-date-picker id="dateOfBirth" style="width: 100%" formControlName="dateOfBirth" nzPlaceHolder="Дата народження"></nz-date-picker>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item [hidden]="radioValue != studentRoleName">
-    <nz-form-control nzErrorTip="University name is required">
-      <input nz-input id="universityName" formControlName="universityName" placeholder="University name"/>
+    <nz-form-control nzErrorTip="Назва університету обов'язкова">
+      <input nz-input id="universityName" formControlName="universityName" placeholder="Назва університету"/>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item [hidden]="radioValue != studentRoleName">
-    <nz-form-control nzErrorTip="Major is required">
-      <input nz-input id="major" formControlName="major" placeholder="Major"/>
+    <nz-form-control nzErrorTip="Спеціальність обо'язкова">
+      <input nz-input id="major" formControlName="major" placeholder="Спеціальніть"/>
     </nz-form-control>
   </nz-form-item>
 
   <!-- EMPLOYER PART -->
 
   <nz-form-item [hidden]="radioValue != employerRoleName">
-    <nz-form-control nzErrorTip="Company name is required">
-      <input nz-input id="companyName" formControlName="companyName" placeholder="Company name"/>
+    <nz-form-control nzErrorTip="Назва компації обов'язкова">
+      <input nz-input id="companyName" formControlName="companyName" placeholder="Назва компанії"/>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item [hidden]="radioValue != employerRoleName">
-    <nz-form-control nzErrorTip="Company description is required">
-      <input nz-input id="companyDescription" formControlName="companyDescription" placeholder="Company description"/>
+    <nz-form-control nzErrorTip="Опис компанії обов'язковий">
+      <input nz-input id="companyDescription" formControlName="companyDescription" placeholder="Опис компанії"/>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item [hidden]="radioValue != employerRoleName">
-    <nz-form-control  nzErrorTip="Company address is required">
-      <input nz-input id="companyAddress" formControlName="companyAddress" placeholder="Company address"/>
+    <nz-form-control  nzErrorTip="Адреса компанії обов'язкова">
+      <input nz-input id="companyAddress" formControlName="companyAddress" placeholder="Адреса компанії"/>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item [hidden]="radioValue != employerRoleName">
-    <nz-form-control nzErrorTip="Contact phone number is required">
-      <input nz-input id="contactPhoneNumber" formControlName="contactPhoneNumber" placeholder="Contact phone number"/>
+    <nz-form-control nzErrorTip="Невірний номер телефону">
+      <input nz-input id="contactPhoneNumber" formControlName="contactPhoneNumber" placeholder="Номер телефону"/>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item [hidden]="radioValue != employerRoleName">
-    <nz-form-control nzErrorTip="Site URL is required">
-      <input nz-input id="siteUrl" formControlName="siteUrl" placeholder="Site URL"/>
+    <nz-form-control nzErrorTip="URL сайту обов'язкове">
+      <input nz-input id="siteUrl" formControlName="siteUrl" placeholder="URL сайту"/>
     </nz-form-control>
   </nz-form-item>
 

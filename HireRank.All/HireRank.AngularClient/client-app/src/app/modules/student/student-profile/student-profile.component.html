@@ -3,42 +3,43 @@
     <form nz-form [formGroup]="studentForm" (ngSubmit)="submitStudentForm()">
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="firstName">Ім'я</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="First name is required">
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="First name is not valid">
           <input nz-input id="firstName" formControlName="firstName" [(ngModel)]="student.firstName"/>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="middleName">Друге ім'я</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Middle name is required">
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Middle name is not valid">
           <input nz-input id="middleName" formControlName="middleName" [(ngModel)]="student.middleName"/>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="lastName">Прізвище</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Last name is required">
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Last name is not valid">
           <input nz-input id="lastName" formControlName="lastName" [(ngModel)]="student.lastName"/>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="dateOfBirth">Дата народження</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Date of birth is required">
-          <nz-date-picker id="dateOfBirth" formControlName="dateOfBirth" [(ngModel)]="student.dateOfBirth"></nz-date-picker>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Date of birth is not valid">
+          <nz-date-picker id="dateOfBirth" formControlName="dateOfBirth" [(ngModel)]="student.dateOfBirth"
+                          [nzDisabledDate]="disabledDate"></nz-date-picker>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="universityName">Навчальний заклад</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="University name is required">
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="University name is not valid">
           <input nz-input id="universityName" formControlName="universityName" [(ngModel)]="student.universityName"/>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="major">Спеціальність</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Major is required">
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Major is not valid">
           <input nz-input id="major" formControlName="major" [(ngModel)]="student.major"/>
         </nz-form-control>
       </nz-form-item>

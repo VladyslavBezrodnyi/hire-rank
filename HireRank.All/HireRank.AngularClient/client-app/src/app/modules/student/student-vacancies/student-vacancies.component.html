@@ -1,19 +1,36 @@
-<div *ngFor="let item of campaigns">
-  <h2 style="text-align: center">{{ item }}</h2>
-  <nz-table nzBordered [nzData]="result[item]" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ y: '240px' }">
-    <thead>
-    <tr>
-      <th nzWidth="20%">Назва</th>
-      <th nzWidth="80%">Опис</th>
-    </tr>
-    </thead>
-    <tbody cdkDropList (cdkDropListDropped)="drop(item, $event)">
-    <tr *ngFor="let data of result[item]" cdkDrag>
-      <td>{{ data.title }}</td>
-      <td>{{ data.description }}</td>
-    </tr>
-    </tbody>
-  </nz-table>
-</div>
+<div *ngIf="areAnyVacancies; then anyVacancies else noVacancies"></div>
 
-<button nz-button nzType="primary" style="alignment: center" (click)="assignPriority()">Зберегти</button>
+<ng-template #anyVacancies>
+  <div *ngFor="let item of campaigns">
+    <h2 style="text-align: center">{{ item }}</h2>
+    <nz-table nzBordered [nzData]="result[item]" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ y: '240px' }">
+      <thead>
+      <tr>
+        <th nzWidth="5%">№</th>
+        <th nzWidth="20%">Назва</th>
+        <th nzWidth="75%">Опис</th>
+      </tr>
+      </thead>
+      <tbody cdkDropList (cdkDropListDropped)="drop(item, $event)">
+      <tr *ngFor="let data of result[item]; let i = index" cdkDrag>
+        <td>{{ i + 1 }}</td>
+        <td>{{ data.title }}</td>
+        <td>{{ data.description }}</td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </div>
+
+  <button nz-button nzType="primary" style="alignment: center" (click)="assignPriority()">Зберегти</button>
+</ng-template>
+
+<ng-template #noVacancies>
+  <nz-empty
+    nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+    [nzNotFoundContent]="contentTpl"
+  >
+    <ng-template #contentTpl>
+      <span> Вибачте, нічого не знайдено :( </span>
+    </ng-template>
+  </nz-empty>
+</ng-template>

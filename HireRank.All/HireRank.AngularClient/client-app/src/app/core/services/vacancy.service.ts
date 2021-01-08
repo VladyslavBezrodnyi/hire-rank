@@ -99,7 +99,7 @@ export class VacancyService {
     assignPriority(assignVacancyPriorityModel: AssignVacancyPriorityModel): Observable<string> {
         return this.http.post<string>(this.controllerUrl + '/assign-priority', assignVacancyPriorityModel);
     }
-    
+
     getAllStudentVacancies(studentId: number): Observable<Vacancy[]> {
         return this.http.get<Vacancy[]>(this.controllerUrl + '/student/' + studentId.toString());
     }
@@ -112,7 +112,7 @@ export class VacancyService {
         return this.http.post<string>(this.controllerUrl + '/' + vacancyId + '/tests', questionIds);
     }
 
-    getAllStudentVacancies(studentId: number): Observable<Vacancy[]> {
-      return this.http.get<Vacancy[]>(this.controllerUrl + '/student/' + studentId.toString());
-    }
+    // getAllStudentVacancies(studentId: number): Observable<Vacancy[]> {
+    //   return this.http.get<Vacancy[]>(this.controllerUrl + '/student/' + studentId.toString());
+    // }
 }
