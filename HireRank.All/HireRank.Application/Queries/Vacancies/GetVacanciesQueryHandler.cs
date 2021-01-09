@@ -9,6 +9,7 @@ using HireRank.Core.Store;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -34,6 +35,7 @@ namespace HireRank.Application.Queries.Vacancies
             var vacancies = await _store.Vacancies
                 .Include(x => x.Campaign)
                 .Include(x => x.Employer)
+                .Where(v => v.Employer.IsConfirmed)
                 .Active()
                 .WithTestBase()
                 .ApplyQueryAsync<Vacancy, VacancyViewModel>(request, _mapper.ConfigurationProvider);

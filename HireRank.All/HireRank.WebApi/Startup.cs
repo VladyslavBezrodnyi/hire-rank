@@ -35,6 +35,9 @@ namespace HireRank.WebApi
                                   builder =>
                                   {
                                       builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+                                      builder.WithOrigins("https://hire-rank-beckend.azurewebsites.net").AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+                                      builder.WithOrigins("https://hire-rank-frontend.azurewebsites.net").AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+                                      builder.WithOrigins("https://hirerankangularclient20210109040548.azurewebsites.net").AllowAnyHeader().AllowAnyMethod().AllowCredentials();
                                   });
             });
 
