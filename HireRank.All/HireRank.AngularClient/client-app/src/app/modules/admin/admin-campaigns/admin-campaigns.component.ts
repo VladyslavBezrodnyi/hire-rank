@@ -20,6 +20,8 @@ export class AdminCampaignsComponent implements OnInit {
     items: new Array<Campaign>()
   };
 
+  now = Date.now();
+
   selectedCampaign: Campaign;
 
   loading: Boolean = false;
@@ -177,5 +179,9 @@ export class AdminCampaignsComponent implements OnInit {
 
   viewVacancies(id: string) {
     this.router.navigate(['/admin/campaign', id]);
+  }
+
+  lowerThan(endDate: string) {
+    return Date.parse(endDate) < Date.now();
   }
 }
