@@ -38,17 +38,6 @@ namespace HireRank.Application.Queries.Vacancies
                 .WithTestBase()
                 .ApplyQueryAsync<Vacancy, VacancyViewModel>(request, _mapper.ConfigurationProvider);
 
-            var activeVacancies = new List<VacancyViewModel>();
-            foreach (var c in vacancies.Items)
-            {
-                if (await _campaignProcessingState.CheckStateOfProcessingAsync(c.Campaign.Id) != CampaignProcessingStates.Finished)
-                {
-                    activeVacancies.Add(c);
-                }
-            }
-
-            vacancies.Items = activeVacancies;
-
             return vacancies;
         }
     }
