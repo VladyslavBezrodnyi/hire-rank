@@ -1,0 +1,37 @@
+<h2 style="margin-right: auto; margin-left: auto; margin-top: 10px; margin-bottom: 10px;">Підтвердження роботодавців</h2>
+
+<nz-table
+  nzShowSizeChanger
+  [nzData]="employers">
+  <thead>
+    <tr>
+      <th>
+        Роботодавець
+      </th>
+      <th>
+        Адреса
+      </th>
+      <th>
+        Телефон
+      </th>
+      <th>
+        URL сайту
+      </th>
+      <th>
+        Дія
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of employers">
+      <td>{{ data.companyName }}</td>
+      <td>{{ data.companyAddress }}</td>
+      <td>{{ data.contactPhoneNumber }}</td>
+      <td>{{ data.siteUrl }}</td>
+      <td>
+        <button nz-button *ngIf="!data.isConfirmed" nzType="primary" (click)="confirmEmployer(data)">Підтвердити</button>
+        <button nz-button *ngIf="data.isConfirmed" nzType="primary" (click)="confirmEmployer(data)" nzDanger>Відмінити підтвердження</button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

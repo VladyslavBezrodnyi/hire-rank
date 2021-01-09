@@ -1,3 +1,4 @@
+import { ConfirmationEmployer } from './../../shared/models/confirmation-employer.model';
 import { Injectable } from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
@@ -8,7 +9,7 @@ import {Admin} from '../../shared/models/admin.model';
   providedIn: 'root'
 })
 export class AdminService {
-  controllerUrl: string = environment.apiUrl + '';
+  controllerUrl: string = environment.apiUrl + '/admin';
 
   constructor(private http: HttpClient) { }
 
@@ -18,5 +19,17 @@ export class AdminService {
 
   get(): Observable<Admin> {
     return this.http.get<Admin>(this.controllerUrl + '');
+  }
+
+  getEmployersForConfirmation(): Observable<ConfirmationEmployer[]> {
+    return this.http.get<ConfirmationEmployer[]>(this.controllerUrl + '/allEmployer');
+  }
+
+  getNonConfirmedEmployers(): Observable<ConfirmationEmployer[]> {
+    return this.http.get<ConfirmationEmployer[]>(this.controllerUrl + '/nonConfirmedEmployer');
+  }
+
+  confirmEmployer(employerId: string): Observable<boolean> {
+    return this.http.post<boolean>(this.controllerUrl + '/confirm', { id: employerId});
   }
 }

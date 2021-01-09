@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   isLoginFormVisible = false;
   isRegisterFormVisible = false;
   isLogged = false;
+  currentYear = (new Date()).getFullYear();
 
   constructor(private authorizationService: AuthorizationService, private router: Router) {}
 
