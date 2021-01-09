@@ -26,14 +26,26 @@ namespace HireRank.AngularClient
             {
                 configuration.RootPath = "client-app/dist";
             });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "SPA-client",
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+                                      builder.WithOrigins("https://hire-rank-beckend.azurewebsites.net").AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+                                      builder.WithOrigins("https://hire-rank-frontend.azurewebsites.net").AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+                                  });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseDeveloperExceptionPage();
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
             }
             else
             {
@@ -50,6 +62,7 @@ namespace HireRank.AngularClient
             }
 
             app.UseRouting();
+            app.UseCors("SPA-client");
 
             app.UseSpa(spa =>
             {
