@@ -59,6 +59,12 @@ export class VacancyTestComponent implements OnInit {
   next(): void {
     this.ind += 1;
     if (this.ind >= this.test.questions.length) {
+      let answ = new QuestionAnswer();
+      answ.id = this.curQuestion.id;
+      answ.choosedOptions = this.checkOptions.filter(item => item.checked == true).map(item => item.value);
+      this.checkOptions = [];
+      this.testResult.answers.push(answ);
+
       console.log(this.testResult);
 
       this.testingService.addTestResult(this.testResult)
@@ -78,7 +84,7 @@ export class VacancyTestComponent implements OnInit {
     answer.id = this.curQuestion.id;
     // answer.choosedOptions = [this.radioValue];
     answer.choosedOptions = this.checkOptions.filter(item => item.checked == true).map(item => item.value);
-    this.checkOptions = []
+    this.checkOptions = [];
     this.testResult.answers.push(answer);
     this.curQuestion = this.test.questions[this.ind];
     for (let i of this.curQuestion.options) {

@@ -59,13 +59,22 @@ namespace HireRank.Application.Commands.Testing
                 ))
                 .ToDictionaryAsync(x => x.Key, x => x.Value);
 
-            int correctOptionCount = questionOptionDict.Sum(q => q.Value.Count());
-            int correctUserAnswersCount = request
-                .Answers.Sum(ans => ans.ChoosedOptions.Intersect(questionOptionDict[ans.Id]).Count());
+            //int correctOptionCount = questionOptionDict.Sum(q => q.Value.Count());
+            //int correctUserAnswersCount = request
+            //    .Answers.Sum(ans => ans.ChoosedOptions.Intersect(questionOptionDict[ans.Id]).Count());
 
-            short score = (short)Math.Round(((double)correctUserAnswersCount / correctOptionCount) * 100.0, 0);
+            //short score = (short)Math.Round(((double)correctUserAnswersCount / correctOptionCount) * 100.0, 0);
 
-         
+
+            int percentSum = request
+                .Answers.Sum(ans => Math.Min(ans.ChoosedOptions.Intersect(questionOptionDict[ans.Id]).Count(), 1) * 100 -
+                    (ans.ChoosedOptions.Except(questionOptionDict[ans.Id]).Count() +
+                    questionOptionDict[ans.Id].Except(ans.ChoosedOptions).Count()) * 100 / 
+                    _store.Questions.Where(q => q.Id == ans.Id).Select(q => q.Options.Count).FirstOrDefault());
+
+            short score = (short)Math.Max(Math.Round((double)percentSum / request.Answers.Count, 0), 0);
+
+
             short priority = (short)(_store.StudentVacancies
                 .Where(x => x.StudentId == studentId && x.Vacancy.CampaignId == selectedVacancy.CampaignId)
                 .Count() + 1);
