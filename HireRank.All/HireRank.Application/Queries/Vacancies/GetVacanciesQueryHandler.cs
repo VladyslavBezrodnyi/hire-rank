@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
 using HireRank.Application.Filtering;
+using HireRank.Application.Services.Interfaces;
 using HireRank.Application.ViewModels.Shared;
 using HireRank.Core.Entities;
 using HireRank.Core.Extensions;
+using HireRank.Core.StablePairing;
 using HireRank.Core.Store;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,11 +18,15 @@ namespace HireRank.Application.Queries.Vacancies
     {
         private readonly IStore _store;
         private readonly IMapper _mapper;
+        private readonly ICurrentUserService _currentUserService;
+        private readonly ICampaignProcessingState _campaignProcessingState;
 
-        public GetVacanciesQueryHandler(IStore store, IMapper mapper)
+        public GetVacanciesQueryHandler(IStore store, IMapper mapper, ICurrentUserService currentUserService, ICampaignProcessingState campaignProcessingState)
         {
             _store = store;
             _mapper = mapper;
+            _currentUserService = currentUserService;
+            _campaignProcessingState = campaignProcessingState;
         }
 
         public async Task<PagedResult<VacancyViewModel>> Handle(GetVacanciesQuery request, CancellationToken cancellationToken)
@@ -30,6 +37,17 @@ namespace HireRank.Application.Queries.Vacancies
                 .Active()
                 .WithTestBase()
                 .ApplyQueryAsync<Vacancy, VacancyViewModel>(request, _mapper.ConfigurationProvider);
+
+            var activeVacancies = new List<VacancyViewModel>();
+            foreach (var c in vacancies.Items)
+            {
+                if (await _campaignProcessingState.CheckStateOfProcessingAsync(c.Campaign.Id) != CampaignProcessingStates.Finished)
+                {
+                    activeVacancies.Add(c);
+                }
+            }
+
+            vacancies.Items = activeVacancies;
 
             return vacancies;
         }

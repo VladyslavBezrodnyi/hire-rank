@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using HireRank.Application.Services.Interfaces;
 using HireRank.Application.ViewModels;
 using HireRank.Core.Extensions;
+using HireRank.Core.StablePairing;
 using HireRank.Core.Store;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
