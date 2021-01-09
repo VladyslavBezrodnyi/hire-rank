@@ -57,10 +57,10 @@
         </a>
       </td>
       <td>
-        <button *ngIf="data.state == 0" (click)="closeCampaign(data.id)" nz-button nzType="primary" [nzSize]="size" nzShape="round"><i nz-icon nzType="issues-close" nzTheme="outline"></i>Закрити</button>
+        <button (click)="viewVacancies(data.id)" nz-button nzType="success" [nzSize]="size" nzShape="round"><i nz-icon nzType="trophy" nzTheme="outline"></i>Вакансії</button>
       </td>
       <td>
-        <button (click)="viewVacancies(data.id)" nz-button nzType="success" [nzSize]="size" nzShape="round"><i nz-icon nzType="trophy" nzTheme="outline"></i>Вакансії</button>
+        <button *ngIf="data.state == 0" (click)="closeCampaign(data.id)" nz-button nzType="primary" [nzSize]="size" nzShape="round"><i nz-icon nzType="issues-close" nzTheme="outline"></i>Закрити</button>
       </td>
     </tr>
   </tbody>
